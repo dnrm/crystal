@@ -17,20 +17,39 @@ const Users = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-6">
             {users.map((i) => {
                 return (
-                    <Link href={`/users/${i.content}`}>
-                        <a>
-                            <div
-                                className="user-container p-4 shadow-sm rounded-md border-gray-200 border-2 cursor-pointer"
-                                key={i._id}
-                            >
-                                <div className="name">
-                                    <h1 className="text-2xl font-bold tracking-tighter">
+                    <div
+                        className="user-container p-4 shadow-sm rounded-md border-gray-200 border-2 hover:bg-gray-100 flex justify-between items-center"
+                        key={i._id}
+                    >
+                        <Link href={`/users/${i.content}`}>
+                            <a>
+                                <div className="name cursor-pointer">
+                                    <h1 className="text-3xl font-bold tracking-tighter hover:underline">
                                         {i.content}
                                     </h1>
+                                    <h3>{new Date(i.date).toDateString() + ' ' + new Date(i.date).toLocaleTimeString()}</h3>
                                 </div>
+                            </a>
+                        </Link>
+                        <a href={`https://instagram.com/${i.content}`} rel="noreferrer" target="_blank">
+                            <div className="link bg-blue-500 p-4 rounded-lg text-white">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                    />
+                                </svg>
                             </div>
                         </a>
-                    </Link>
+                    </div>
                 );
             })}
         </div>
