@@ -4,10 +4,15 @@ import src from "../images/cover.jpeg";
 import Users from "../components/Users";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { useSession } from "next-auth/client";
 
 export default function Home() {
+    const [session] = useSession();
+
     return (
         <>
+            <Navbar />
             <main className="flex flex-col p-8">
                 <Head>
                     <title>User Profiles | dnrm</title>
@@ -25,32 +30,47 @@ export default function Home() {
                         crossOrigin="anonymous"
                     ></script>
                 </Head>
-                <header className="flex items-center justify-between">
-                    <h1 className="text-6xl md:text-8xl lg:text-9xl tracking-tighter font-bold text-black py-10">
+                <header className={`flex items-center justify-between`}>
+                    <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-bold text-black py-5">
                         Welcome
                     </h1>
                     <div className="login flex items-center">
-                        <Link href={`/login`}>
-                            <div className="flex items-center cursor-pointer">
-                                <p className="font-semibold tracking-tighter">
-                                    Login
-                                </p>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-12 w-12 mx-1"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                        {session && (
+                            <Link href={`/dashboard`}>
+                                <a>
+                                    <img
+                                        // @ts-ignore
+                                        src={session.user.image}
+                                        // @ts-ignore
+                                        alt={session.user?.name}
+                                        className="rounded-full shadow-xl"
                                     />
-                                </svg>
-                            </div>
-                        </Link>
+                                </a>
+                            </Link>
+                        )}
+                        {!session && (
+                            <Link href={`/dashboard`}>
+                                <div className="flex items-center cursor-pointer">
+                                    <p className="font-semibold tracking-tighter text-xl md:text-2xl">
+                                        Login
+                                    </p>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-8 md:h-12 w-8 md:w-12 mx-1"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                                        />
+                                    </svg>
+                                </div>
+                            </Link>
+                        )}
                     </div>
                 </header>
                 <section>

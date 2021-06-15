@@ -24,10 +24,10 @@ const Users = () => {
                         <Link href={`/users/${i.content}`}>
                             <a>
                                 <div className="name cursor-pointer">
-                                    <h1 className="text-3xl font-bold tracking-tighter hover:underline">
+                                    <h1 className="text-xl sm:text-2xl font-bold tracking-tighter hover:underline">
                                         {i.content}
                                     </h1>
-                                    <h3>{new Date(i.date).toDateString() + ' ' + new Date(i.date).toLocaleTimeString()}</h3>
+                                    <h3 className="text-sm sm:text-md">{new Date(i.date).toDateString() + ' ' + new Date(i.date).toLocaleTimeString()}</h3>
                                 </div>
                             </a>
                         </Link>
