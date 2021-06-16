@@ -37,7 +37,7 @@ const Navbar = () => {
                     <Link href={`/dashboard`}>
                         <a className="flex flex-row justify-between items-center">
                             {/* @ts-ignore */}
-                            <p className="text-sm text-gray-500 filter drop-shadow-xl">
+                            <p className="text-sm text-gray-500 filter drop-shadow-xl hidden md:block">
                                 {/* @ts-ignore */}
                                 {session.user.email}
                             </p>
