@@ -16,7 +16,7 @@ const Navbar = () => {
                     rel="stylesheet"
                 />
             </Head>
-            <ul className="flex p-4 px-8 py-5 justify-between items-center">
+            <ul className="flex p-4 md:px-8 py-5 justify-between items-center">
                 <div className="flex">
                     <li className="px-2 tracking-tighter">
                         <Link href="/">
