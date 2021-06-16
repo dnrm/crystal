@@ -1,11 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
-import src from "../images/cover.jpeg";
+import src from "../images/island.jpg";
 import Users from "../components/Users";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useSession } from "next-auth/client";
+import style from '../styles/background.module.css';
 
 export default function Home() {
     const [session] = useSession();
@@ -61,7 +62,7 @@ export default function Home() {
                     </div>
                 </header>
                 <section>
-                    <Image src={src} layout="responsive" />
+                    <Image src={src} layout="responsive" placeholder="blur" />
                 </section>
                 <section id="users">
                     <h1 className="text-4xl md:text-6xl lg:text-8xl tracking-tighter font-bold text-black pt-8 pb-2">
