@@ -16,7 +16,7 @@ const Navbar = () => {
                     rel="stylesheet"
                 />
             </Head>
-            <ul className="flex p-4 justify-start px-8 py-5 justify-between items-center">
+            <ul className="flex p-4 px-8 py-5 justify-between items-center">
                 <div className="flex">
                     <li className="px-2 tracking-tighter">
                         <Link href="/">
@@ -38,6 +38,7 @@ const Navbar = () => {
                         <a className="flex flex-row justify-between items-center">
                             {/* @ts-ignore */}
                             <p className="text-sm text-gray-500 filter drop-shadow-xl">
+                                {/* @ts-ignore */}
                                 {session.user.email}
                             </p>
                             <img
