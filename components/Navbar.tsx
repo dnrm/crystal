@@ -18,14 +18,14 @@ const Navbar = () => {
             </Head>
             <ul className="flex p-4 md:px-8 py-5 justify-between items-center">
                 <div className="flex">
-                    <li className="px-2 tracking-tighter">
+                    <li className="px-1 md:px-2 tracking-tighter">
                         <Link href="/">
                             <a className={`${styles.mono} text-lg font-normal`}>
                                 Home
                             </a>
                         </Link>
                     </li>
-                    <li className="px-2 tracking-tighter">
+                    <li className="px-1 md:px-2 tracking-tighter">
                         <Link href="/dashboard">
                             <a className={`${styles.mono} text-lg font-normal`}>
                                 Dashboard
