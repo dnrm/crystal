@@ -15,11 +15,11 @@ export default function Home() {
             <Navbar />
             <main className="flex flex-col p-8">
                 <Head>
-                    <title>User Profiles | dnrm</title>
-                    <meta property="og:title" content="Home | dnrm" />
+                    <title>Crystal | dnrm</title>
+                    <meta property="og:title" content="Crystal | dnrm" />
                     <meta
                         property="og:description"
-                        content="Social media site by Daniel Medina"
+                        content="Crystal is a social media site by Daniel Medina"
                     />
                     <meta
                         property="og:image"
@@ -35,19 +35,6 @@ export default function Home() {
                         Welcome
                     </h1>
                     <div className="login flex items-center">
-                        {session && (
-                            <Link href={`/dashboard`}>
-                                <a>
-                                    <img
-                                        // @ts-ignore
-                                        src={session.user.image}
-                                        // @ts-ignore
-                                        alt={session.user?.name}
-                                        className="rounded-full shadow-xl"
-                                    />
-                                </a>
-                            </Link>
-                        )}
                         {!session && (
                             <Link href={`/dashboard`}>
                                 <div className="flex items-center cursor-pointer">
