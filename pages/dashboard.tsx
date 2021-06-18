@@ -1,6 +1,7 @@
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
+import Link from "next/link";
 
 export default function Login() {
     const [session] = useSession();
@@ -42,10 +43,84 @@ export default function Login() {
                 <hr className="border-1 border-gray-300" />
                 <section>
                     {session ? (
-                        <h1 className="text-2xl md:text-4xl lg:text-4xl tracking-tighter font-bold text-black pt-8 pb-2">
-                            {/* @ts-ignore */}
-                            Hello, {session.user.name}
-                        </h1>
+                        <div className="dashboard-content">
+                            <div className="create-post py-4 flex justify-between items-center">
+                                <h1 className="text-2xl md:text-4xl font-semibold">
+                                    Posts
+                                </h1>
+                                <Link href={`/create-post`}>
+                                    <a className="p-4 bg-blue-500 text-white inline-block shadow-sm hover:shadow-xl rounded-xl transition-all duration-200">
+                                        Create Post
+                                    </a>
+                                </Link>
+                            </div>
+                            <div className="posts grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                                <Link
+                                    href={`/posts/${Math.floor(
+                                        Math.random() * 100
+                                    )}`}
+                                >
+                                    <a>
+                                        <div className="post bg-gray-100 rounded-lg p-4 shadow-lg">
+                                            <div className="image">
+                                                <img
+                                                    src="https://cdn.medina.dev/photo1.jpg"
+                                                    alt=""
+                                                    className="h-36 w-full object-cover rounded-md shadow-lg"
+                                                />
+                                            </div>
+                                            <h1 className="text-xl font-semibold pt-2">
+                                                How to write and record your
+                                                first song using Garageband and
+                                                a piano.
+                                            </h1>
+                                        </div>
+                                    </a>
+                                </Link>
+                                <Link
+                                    href={`/posts/${Math.floor(
+                                        Math.random() * 100
+                                    )}`}
+                                >
+                                    <a>
+                                        <div className="post bg-gray-100 rounded-lg p-4 shadow-lg">
+                                            <div className="image">
+                                                <img
+                                                    src="https://cdn.medina.dev/photo2.jpg"
+                                                    alt=""
+                                                    className="h-36 w-full object-cover rounded-md shadow-lg"
+                                                />
+                                            </div>
+                                            <h1 className="text-xl font-semibold pt-2">
+                                                My opinion on Oasis' debut album
+                                                Definitely Maybe.
+                                            </h1>
+                                        </div>
+                                    </a>
+                                </Link>
+                                <Link
+                                    href={`/posts/${Math.floor(
+                                        Math.random() * 100
+                                    )}`}
+                                >
+                                    <a>
+                                        <div className="post bg-gray-100 rounded-lg p-4 shadow-lg">
+                                            <div className="image">
+                                                <img
+                                                    src="https://cdn.medina.dev/photo3.jpg"
+                                                    alt=""
+                                                    className="h-36 w-full object-cover rounded-md shadow-lg"
+                                                />
+                                            </div>
+                                            <h1 className="text-xl font-semibold pt-2">
+                                                My opinion on Oasis' debut album
+                                                Definitely Maybe.
+                                            </h1>
+                                        </div>
+                                    </a>
+                                </Link>
+                            </div>
+                        </div>
                     ) : (
                         <div className="login-form w-auto h-80 flex flex-col justify-center items-center text-center">
                             <h3 className="text-2xl">
