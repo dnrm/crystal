@@ -1,7 +1,7 @@
 # Crystal
 Crystal is a social media application built with Next.js and Tailwind CSS.
 
-Check out the live demo [here](https://users.medina.dev/)
+Check out the live demo [here](https://crystal.medina.dev/)
 
 ## Technologies
 
