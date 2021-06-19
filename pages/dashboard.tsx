@@ -118,8 +118,7 @@ export default function Login() {
                                                 />
                                             </div>
                                             <h1 className="text-xl font-semibold pt-2">
-                                                My opinion on Oasis' debut album
-                                                Definitely Maybe.
+                                                Urban Hymns, the album that propelled The Verve into fame
                                             </h1>
                                         </div>
                                     </a>
