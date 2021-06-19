@@ -1,4 +1,5 @@
 import React from "react";
+import Head from 'next/head';
 import { signIn, signOut, useSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
@@ -8,6 +9,10 @@ export default function Login() {
 
     return (
         <>
+            <Head>
+                <title>Dashboard | Crystal</title>
+                <meta name="description" content="View your dashboard" />
+            </Head>
             <Navbar />
             <main className="flex flex-col p-8">
                 <header className="flex items-center justify-between">
