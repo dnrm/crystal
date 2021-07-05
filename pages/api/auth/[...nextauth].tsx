@@ -5,7 +5,18 @@ export default NextAuth({
     providers: [
         Providers.Google({
             clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET
-        })
-    ]
-})
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        }),
+    ],
+    jwt: {
+        signingKey: process.env.JWT
+        
+    },
+    pages: {
+        signIn: "/signin",
+    },
+    callbacks: {},
+    events: {
+        
+    }
+});

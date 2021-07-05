@@ -1,10 +1,11 @@
 import React from "react";
-import Head from 'next/head';
-import { signIn, signOut, useSession } from "next-auth/client";
+import Head from "next/head";
+import { signIn, signOut, useSession, getSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
+import { GetServerSidePropsContext } from "next";
 
-export default function Login() {
+export default function Login(props: any) {
     const [session] = useSession();
 
     return (
@@ -118,7 +119,8 @@ export default function Login() {
                                                 />
                                             </div>
                                             <h1 className="text-xl font-semibold pt-2">
-                                                Urban Hymns, the album that propelled The Verve into fame
+                                                Urban Hymns, the album that
+                                                propelled The Verve into fame
                                             </h1>
                                         </div>
                                     </a>
@@ -142,4 +144,14 @@ export default function Login() {
             </main>
         </>
     );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const session = await getSession(context);
+
+    return {
+        props: {
+            session,
+        },
+    };
 }

@@ -14,7 +14,7 @@ export default function Home() {
     return (
         <>
             <Navbar />
-            <main className="flex flex-col p-4 md:p-8" >
+            <main className="flex flex-col p-4 md:p-8">
                 <Head>
                     <title>Home | Crystal</title>
                     <meta property="og:title" content="Crystal | dnrm" />
