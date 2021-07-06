@@ -1,11 +1,12 @@
 import React from "react";
 import Head from "next/head";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { signIn, signOut, useSession, getSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
+import { GetServerSidePropsContext } from "next";
 import Post from "../components/Post";
 
-export default function Login() {
+export default function Login(props: any) {
     const [session] = useSession();
 
     return (
@@ -144,4 +145,14 @@ export default function Login() {
             </main>
         </>
     );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const session = await getSession(context);
+
+    return {
+        props: {
+            session,
+        },
+    };
 }
