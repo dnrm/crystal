@@ -1,8 +1,9 @@
 import React from "react";
-import Head from 'next/head';
+import Head from "next/head";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
+import Post from "../components/Post";
 
 export default function Login() {
     const [session] = useSession();
@@ -12,6 +13,16 @@ export default function Login() {
             <Head>
                 <title>Dashboard | Crystal</title>
                 <meta name="description" content="View your dashboard" />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossOrigin={`true`}
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+                    rel="stylesheet"
+                />
             </Head>
             <Navbar />
             <main className="flex flex-col p-8">
@@ -59,7 +70,19 @@ export default function Login() {
                                     </a>
                                 </Link>
                             </div>
-                            <div className="posts grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                            <div className="posts grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                                <Post
+                                    src="https://i.scdn.co/image/ab67616d0000b2737a4c8c59851c88f6794c3cbf"
+                                    href="/posts/"
+                                >
+                                    Remembering the glory days of Oasis.
+                                </Post>
+                                <Post
+                                    src="https://i.scdn.co/image/ab67616d0000b2737c8f18614002cc5542f6c7aa"
+                                    href="/posts/"
+                                >
+                                    Remembering the glory days of Oasis.
+                                </Post>
                                 <Link
                                     href={`/posts/${Math.floor(
                                         Math.random() * 100
@@ -69,34 +92,12 @@ export default function Login() {
                                         <div className="post bg-gray-100 rounded-lg p-4 shadow-lg">
                                             <div className="image">
                                                 <img
-                                                    src="https://cdn.medina.dev/photo1.jpg"
+                                                    src="https://i.scdn.co/image/ab67616d0000b2737c8f18614002cc5542f6c7aa"
                                                     alt=""
-                                                    className="h-36 w-full object-cover rounded-md shadow-lg"
+                                                    className="h-full w-full object-cover rounded-md shadow-lg"
                                                 />
                                             </div>
-                                            <h1 className="text-xl font-semibold pt-2">
-                                                How to write and record your
-                                                first song using Garageband and
-                                                a piano.
-                                            </h1>
-                                        </div>
-                                    </a>
-                                </Link>
-                                <Link
-                                    href={`/posts/${Math.floor(
-                                        Math.random() * 100
-                                    )}`}
-                                >
-                                    <a>
-                                        <div className="post bg-gray-100 rounded-lg p-4 shadow-lg">
-                                            <div className="image">
-                                                <img
-                                                    src="https://cdn.medina.dev/photo2.jpg"
-                                                    alt=""
-                                                    className="h-36 w-full object-cover rounded-md shadow-lg"
-                                                />
-                                            </div>
-                                            <h1 className="text-xl font-semibold pt-2">
+                                            <h1 className="text-lg font-semibold pt-2 font-dm">
                                                 My opinion on Oasis' debut album
                                                 Definitely Maybe.
                                             </h1>
@@ -112,13 +113,14 @@ export default function Login() {
                                         <div className="post bg-gray-100 rounded-lg p-4 shadow-lg">
                                             <div className="image">
                                                 <img
-                                                    src="https://cdn.medina.dev/photo3.jpg"
+                                                    src="https://i.scdn.co/image/ab67616d0000b273707d13d3f87652e737e94d45"
                                                     alt=""
-                                                    className="h-36 w-full object-cover rounded-md shadow-lg"
+                                                    className="h-full w-full object-cover rounded-md shadow-lg"
                                                 />
                                             </div>
-                                            <h1 className="text-xl font-semibold pt-2">
-                                                Urban Hymns, the album that propelled The Verve into fame
+                                            <h1 className="text-lg font-semibold pt-2 font-dm">
+                                                Urban Hymns, the album that
+                                                propelled The Verve into fame
                                             </h1>
                                         </div>
                                     </a>
