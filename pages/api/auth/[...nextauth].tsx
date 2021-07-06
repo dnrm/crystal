@@ -7,7 +7,6 @@ export default NextAuth({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
-<<<<<<< HEAD
         Providers.GitHub({
             clientId: process.env.GITHUB_CLIENT_ID,
             clientSecret: process.env.GITHUB_CLIENT_SECRET
@@ -16,18 +15,4 @@ export default NextAuth({
     pages: {
         signIn: "/signin",
     },
-=======
-    ],
-    jwt: {
-        signingKey: process.env.JWT
-        
-    },
-    pages: {
-        signIn: "/signin",
-    },
-    callbacks: {},
-    events: {
-        
-    }
->>>>>>> @feature/custom-auth
 });

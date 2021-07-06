@@ -82,50 +82,34 @@ export default function Login(props: any) {
                                     src="https://i.scdn.co/image/ab67616d0000b2737c8f18614002cc5542f6c7aa"
                                     href="/posts/"
                                 >
-                                    Remembering the glory days of Oasis.
+                                    My opinion on Oasis' debut album Definitely
+                                    Maybe.
                                 </Post>
-                                <Link
-                                    href={`/posts/${Math.floor(
-                                        Math.random() * 100
-                                    )}`}
+                                <Post
+                                    src="https://i.scdn.co/image/ab67616d0000b273707d13d3f87652e737e94d45"
+                                    href="/posts/"
                                 >
-                                    <a>
-                                        <div className="post bg-gray-100 rounded-lg p-4 shadow-lg">
-                                            <div className="image">
-                                                <img
-                                                    src="https://i.scdn.co/image/ab67616d0000b2737c8f18614002cc5542f6c7aa"
-                                                    alt=""
-                                                    className="h-full w-full object-cover rounded-md shadow-lg"
-                                                />
-                                            </div>
-                                            <h1 className="text-lg font-semibold pt-2 font-dm">
-                                                My opinion on Oasis' debut album
-                                                Definitely Maybe.
-                                            </h1>
-                                        </div>
-                                    </a>
-                                </Link>
-                                <Link
-                                    href={`/posts/${Math.floor(
-                                        Math.random() * 100
-                                    )}`}
+                                    Urban Hymns, the album that propelled The
+                                    Verve into fame
+                                </Post>
+                                <Post
+                                    src="https://i.scdn.co/image/ab67616d0000b273fd952bece8f049dbcd7df93f"
+                                    href="/posts/"
                                 >
-                                    <a>
-                                        <div className="post bg-gray-100 rounded-lg p-4 shadow-lg">
-                                            <div className="image">
-                                                <img
-                                                    src="https://i.scdn.co/image/ab67616d0000b273707d13d3f87652e737e94d45"
-                                                    alt=""
-                                                    className="h-full w-full object-cover rounded-md shadow-lg"
-                                                />
-                                            </div>
-                                            <h1 className="text-lg font-semibold pt-2 font-dm">
-                                                Urban Hymns, the album that
-                                                propelled The Verve into fame
-                                            </h1>
-                                        </div>
-                                    </a>
-                                </Link>
+                                    The giant four of the 90s: Oasis, Blur, Pulp, and Suede.
+                                </Post>
+                                <Post
+                                    src="https://i.scdn.co/image/ab67616d0000b273aeda362a434f01d0eff70b4e"
+                                    href="/posts/"
+                                >
+                                    Was Be Here Now really the end of Britpop?
+                                </Post>
+                                <Post
+                                    src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/10/02/12/rexfeatures_1588551a_0.jpg"
+                                    href="/posts/"
+                                >
+                                    August 14th 1995, 2 Giants, 1 number one.
+                                </Post>
                             </div>
                         </div>
                     ) : (
