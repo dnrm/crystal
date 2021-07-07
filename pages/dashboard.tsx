@@ -61,12 +61,12 @@ export default function Login(props: any) {
                 <section>
                     {session ? (
                         <div className="dashboard-content">
-                            <div className="create-post py-4 flex justify-between items-center">
+                            <div className="create-post py-8 flex justify-between items-center">
                                 <h1 className="text-2xl md:text-4xl font-semibold">
                                     Posts
                                 </h1>
                                 <Link href={`/create-post`}>
-                                    <a className="p-4 bg-blue-500 text-white inline-block shadow-sm hover:shadow-xl rounded-xl transition-all duration-200">
+                                    <a className="py-2 px-4 bg-blue-500 text-white inline-block shadow-sm hover:shadow-xl rounded-xl transition-all duration-200">
                                         Create Post
                                     </a>
                                 </Link>
