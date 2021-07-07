@@ -71,7 +71,7 @@ export default function Login(props: any) {
                                     </a>
                                 </Link>
                             </div>
-                            <div className="posts grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                            <div className="posts grid grid-cols-1 gap-4">
                                 <Post
                                     src="https://i.scdn.co/image/ab67616d0000b2737a4c8c59851c88f6794c3cbf"
                                     href="/posts/"

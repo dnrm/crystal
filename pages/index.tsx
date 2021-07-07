@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import src from "../images/island.jpg";
+import src from "../images/bg-amsterdam-trees.jpg";
 import Users from "../components/Users";
 import Link from "next/link";
 import Footer from "../components/Footer";

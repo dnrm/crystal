@@ -13,12 +13,12 @@ const Post = ({ href, src, children }: Props) => {
     return (
         <Link href={slug}>
             <a>
-                <div className="post bg-gray-100 rounded-lg p-4 shadow-lg">
-                    <div className="image">
+                <div className="post bg-gray-100 rounded-lg shadow-lg flex flex-row justify-start items-center h-16">
+                    <div className="image h-full">
                         <img
                             src={src}
                             alt=""
-                            className="h-full w-full object-cover rounded-md shadow-lg"
+                            className="h-full object-cover rounded-md mr-2 p-2"
                         />
                     </div>
                     <h1 className="text-lg font-semibold pt-2 font-dm leading-5">
