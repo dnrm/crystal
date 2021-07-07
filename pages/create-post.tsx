@@ -18,8 +18,24 @@ const CreatePost = () => {
                     id="form"
                     className="grid grid-cols-1 md:grid-cols-3 mt-4"
                 >
-                    <div className="col-span-1 upload-image w-full h-96 bg-gray-100 rounded-lg border-dashed border-gray-400 border-4 flex justify-center items-center">
-                        <h1 className="text-3xl font-light">Upload Image</h1>
+                    <div className="upload">
+                        <div className="col-span-1 upload-image w-full h-96 bg-gray-100 rounded-lg border-dashed border-gray-400 border-4 flex flex-col justify-center items-center hover:bg-blue-100 hover:border-blue-300 hover:text-blue-500">
+                            <h1 className="text-3xl font-light text-center leading-6">
+                                Upload Image
+                            </h1>
+                            <label
+                                htmlFor="upload-image"
+                                className="text-sm font-normal text-center hover:font-bold"
+                            >
+                                Or select from device
+                            </label>
+                        </div>
+                        <input
+                            type="file"
+                            name="upload-image"
+                            id="upload-image"
+                            className="hidden"
+                        ></input>
                     </div>
                     <div className="input-elements px-8 col-span-2">
                         <div className="group">
@@ -31,7 +47,9 @@ const CreatePost = () => {
                             />
                         </div>
                         <div className="group mt-4">
-                            <h2 className="text-4xl font-semibold">Description</h2>
+                            <h2 className="text-4xl font-semibold">
+                                Description
+                            </h2>
                             <input
                                 type="text"
                                 placeholder="Description"

@@ -5,11 +5,13 @@ module.exports = {
     extend: {
       fontFamily: {
         'dm': ['"Dm Mono"', 'serif']
-      }
+      },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      fontWeight: ['hover', 'focus'],
+    },
   },
   plugins: [],
 }
