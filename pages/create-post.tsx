@@ -1,12 +1,16 @@
 import React from "react";
 import { signOut, useSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
+import Head from "next/head";
 
 const CreatePost = () => {
     const [session] = useSession();
 
     return (
         <>
+            <Head>
+                <title>Create Post | dnrm</title>
+            </Head>
             <div className="gradient-1 filter blur-3xl bg-teal opacity-20 absolute w-1/2 h-56 rounded-r-full -top-10 -left-8 -z-10"></div>
             <div className="gradient-1 filter blur-3xl bg-neon opacity-20 absolute w-96 h-2/3 top-28 -left-16 -z-10"></div>
             <div className="gradient-1 filter blur-3xl bg-red-400 opacity-40 absolute w-96 h-72 rounded-r-full top-20 left-32 -z-10"></div>
@@ -25,7 +29,7 @@ const CreatePost = () => {
                         <div className="shadow-md col-span-1 upload-image w-full h-96 bg-white rounded-lg border-dashed border-gray-400 border-2 flex flex-col justify-center items-center hover:bg-blue-100 hover:border-blue-300 hover:text-blue-500">
                             <img src={"../images/upload.svg"} alt="" />
                             <h1 className="text-xl font-light text-center leading-6">
-                                Drop image here or {" "}
+                                Drop image here or{" "}
                                 <label
                                     htmlFor="upload-image"
                                     className="hover:underline font-bold"
