@@ -2,12 +2,12 @@ import React from "react";
 import Link from "next/link";
 
 interface Props {
-    href: string;
     src: string;
     children: string;
 }
 
-const Post = ({ href, src, children }: Props) => {
+const Post = ({ src, children }: Props) => {
+    let href = '/post/'
     const slug = href + children.toLowerCase().replace(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, '').split(" ").join("-");
 
     return (

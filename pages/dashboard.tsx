@@ -74,39 +74,33 @@ export default function Login(props: any) {
                             <div className="posts grid grid-cols-1 gap-4">
                                 <Post
                                     src="https://i.scdn.co/image/ab67616d0000b2737a4c8c59851c88f6794c3cbf"
-                                    href="/posts/"
                                 >
                                     Remembering the glory days of Oasis.
                                 </Post>
                                 <Post
                                     src="https://i.scdn.co/image/ab67616d0000b2737c8f18614002cc5542f6c7aa"
-                                    href="/posts/"
                                 >
                                     My opinion on Oasis' debut album Definitely
                                     Maybe.
                                 </Post>
                                 <Post
                                     src="https://i.scdn.co/image/ab67616d0000b273707d13d3f87652e737e94d45"
-                                    href="/posts/"
                                 >
                                     Urban Hymns, the album that propelled The
                                     Verve into fame
                                 </Post>
                                 <Post
                                     src="https://i.scdn.co/image/ab67616d0000b273fd952bece8f049dbcd7df93f"
-                                    href="/posts/"
                                 >
                                     The giant four of the 90s: Oasis, Blur, Pulp, and Suede.
                                 </Post>
                                 <Post
                                     src="https://i.scdn.co/image/ab67616d0000b273aeda362a434f01d0eff70b4e"
-                                    href="/posts/"
                                 >
                                     Was Be Here Now really the end of Britpop?
                                 </Post>
                                 <Post
                                     src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/10/02/12/rexfeatures_1588551a_0.jpg"
-                                    href="/posts/"
                                 >
                                     August 14th 1995, 2 Giants, 1 number one.
                                 </Post>
