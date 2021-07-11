@@ -11,10 +11,11 @@ interface Post {
     user: string;
 }
 
-const CreatePost = (props: any) => {
-    const [session] = useSession();
-    
+interface Props {
+    session: object;
+}
 
+const CreatePost = ({ session }: Props) => {
     const titleRef: any = useRef();
     const contentRef: any = useRef();
 
@@ -32,20 +33,20 @@ const CreatePost = (props: any) => {
                     // @ts-ignore
                     user: session.user?.email,
                 });
-                console.log(response)
+                console.log(response);
             } catch (e) {
-                console.log(e)
+                console.log(e);
             }
         }
     };
 
     const createPost = async ({ title, content, user }: Post) => {
-        let api = (process.env.API || '') + '/create-user';
+        let api = (process.env.API || "") + "/create-user";
 
         const response = fetch(api, {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 name: title,
@@ -54,16 +55,13 @@ const CreatePost = (props: any) => {
             }),
         });
 
-        return response
+        return response;
     };
 
     return (
         <>
             <Head>
                 <title>Create Post | dnrm</title>
-                {props.loggedIn == false ? (
-                    <meta http-equiv="refresh" content="0; url=/" />
-                ) : null}
             </Head>
             <div className="gradient-1 filter blur-3xl bg-teal opacity-20 absolute w-1/2 h-56 rounded-r-full -top-10 -left-8 -z-10"></div>
             <div className="gradient-1 filter blur-3xl bg-neon opacity-20 absolute w-96 h-2/3 top-28 -left-16 -z-10"></div>
@@ -167,14 +165,16 @@ export async function getServerSideProps(context: any) {
     const session = await getSession(context);
     if (!session) {
         return {
-            props: {
-                loggedIn: false,
-            },
+            props: {},
+            redirect: {
+                destination: '/signin',
+                permanent: false
+            }
         };
     } else {
         return {
             props: {
-                loggedIn: true,
+                session,
             },
         };
     }
