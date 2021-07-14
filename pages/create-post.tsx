@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { signOut, useSession, getSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
 
@@ -15,7 +15,7 @@ interface Props {
     session: object;
 }
 
-const CreatePost = ({ session }: Props) => {
+const Create = ({ session }: Props) => {
     const titleRef: any = useRef();
     const contentRef: any = useRef();
 
@@ -24,7 +24,12 @@ const CreatePost = ({ session }: Props) => {
             e.preventDefault();
 
             let title = titleRef.current.value;
-            let content = titleRef.current.value;
+            let content = contentRef.current.value;
+
+            if (title == '' || content == '') {
+                // validate()
+                return;
+            }
 
             try {
                 let response = await createPost({
@@ -58,6 +63,17 @@ const CreatePost = ({ session }: Props) => {
         return response;
     };
 
+    // const validate = () => {
+    //     titleRef.current.style.borderColor = 'red';
+    //     titleRef.current.style.backgroundColor = '#fadede';
+    //     titleRef.current.style.color = 'black';
+
+    //     contentRef.current.style.borderColor = 'red';
+    //     contentRef.current.style.backgroundColor = '#fadede';
+    //     contentRef.current.style.color = 'black';
+
+    // }
+
     return (
         <>
             <Head>
@@ -67,7 +83,7 @@ const CreatePost = ({ session }: Props) => {
             <div className="gradient-1 filter blur-3xl bg-neon opacity-20 absolute w-96 h-2/3 top-28 -left-16 -z-10"></div>
             <div className="gradient-1 filter blur-3xl bg-red-400 opacity-40 absolute w-96 h-72 rounded-r-full top-20 left-32 -z-10"></div>
             <Navbar />
-            <main className="flex flex-col p-8">
+            <main className="flex flex-col p-4 md:p-8">
                 <header className="flex items-center justify-between">
                     <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-bold text-black py-5">
                         Create Post
@@ -80,7 +96,22 @@ const CreatePost = ({ session }: Props) => {
                     >
                         <div className="upload">
                             <div className="shadow-md col-span-1 upload-image w-full h-96 bg-white rounded-lg border-dashed border-gray-400 border-2 flex flex-col justify-center items-center hover:bg-blue-100 hover:border-blue-300 hover:text-blue-500">
-                                <img src={"../images/upload.svg"} alt="" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="64"
+                                    height="64"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke={"currentColor"}
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    className="hover:text-blue-500 feather w-16 h-16 feather-upload"
+                                >
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
                                 <h1 className="text-xl font-light text-center leading-6">
                                     Drop image here or{" "}
                                     <label
@@ -98,7 +129,7 @@ const CreatePost = ({ session }: Props) => {
                                 className="hidden"
                             ></input>
                         </div>
-                        <div className="pl-8 col-span-2 flex flex-col justify-between items-stretch w-full">
+                        <div className="mt-8 md:mt-0 pl-0 md:pl-8 col-span-2 flex flex-col justify-between items-stretch w-full">
                             <div className="input-elements">
                                 <div className="group">
                                     <h2 className="text-3xl font-semibold tracking-tighter">
@@ -159,23 +190,20 @@ const CreatePost = ({ session }: Props) => {
     );
 };
 
-export default CreatePost;
+export default Create;
 
 export async function getServerSideProps(context: any) {
     const session = await getSession(context);
     if (!session) {
         return {
-            props: {},
             redirect: {
-                destination: '/signin',
-                permanent: false
-            }
-        };
-    } else {
-        return {
-            props: {
-                session,
+                destination: "/signin",
+                permanent: false,
             },
         };
     }
+
+    return {
+        props: { session },
+    };
 }
