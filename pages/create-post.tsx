@@ -38,8 +38,8 @@ const Create = ({ session }: Props) => {
      */
 
     const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
         if (session) {
-            e.preventDefault();
 
             let title = titleRef.current.value;
             let content = contentRef.current.value;
@@ -64,7 +64,7 @@ const Create = ({ session }: Props) => {
     };
 
     const createPost = async ({ title, content, user }: Post) => {
-        let api = (process.env.API || "") + "/create-user";
+        let api = "/create-post";
 
         const response = fetch(api, {
             method: "POST",
@@ -92,9 +92,12 @@ const Create = ({ session }: Props) => {
         });
 
         try {
-            const response = await fetch("https://example.com" || "", {
+            const response = await fetch("/api/upload", {
                 method: "POST",
-                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData
             });
             console.log(response);
         } catch (e) {
