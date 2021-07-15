@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { FormEvent, useRef, useCallback, useState } from "react";
 import { getSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import { useDropzone } from "react-dropzone";
+import Footer from '../components/Footer';
 
 // * Types
 
@@ -19,15 +21,30 @@ const Create = ({ session }: Props) => {
     const titleRef: any = useRef();
     const contentRef: any = useRef();
 
-    const handleSubmit = async (e: any) => {
+    const [files, setFiles] = useState<FileList | null>();
+
+    const onDrop = useCallback(async (acceptedFiles) => {
+        await setFiles(acceptedFiles);
+    }, []);
+
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+    });
+
+    /**
+     * handleSubmit
+     * @param {FormEvent} e
+     * @returns If input elements are empty, nothing, else it makes a POST request to API creating a new post.
+     */
+
+    const handleSubmit = async (e: FormEvent) => {
         if (session) {
             e.preventDefault();
 
             let title = titleRef.current.value;
             let content = contentRef.current.value;
 
-            if (title == '' || content == '') {
-                // validate()
+            if (title == "" || content == "") {
                 return;
             }
 
@@ -38,6 +55,7 @@ const Create = ({ session }: Props) => {
                     // @ts-ignore
                     user: session.user?.email,
                 });
+                files ? uploadImage(files) : null;
                 console.log(response);
             } catch (e) {
                 console.log(e);
@@ -63,25 +81,35 @@ const Create = ({ session }: Props) => {
         return response;
     };
 
-    // const validate = () => {
-    //     titleRef.current.style.borderColor = 'red';
-    //     titleRef.current.style.backgroundColor = '#fadede';
-    //     titleRef.current.style.color = 'black';
+    const uploadImage = async (fileList: FileList) => {
+        console.log(fileList);
 
-    //     contentRef.current.style.borderColor = 'red';
-    //     contentRef.current.style.backgroundColor = '#fadede';
-    //     contentRef.current.style.color = 'black';
+        let formData = new FormData();
 
-    // }
+        Array.from(fileList).forEach((i) => {
+            console.log(i);
+            formData.append("image", i, i.name);
+        });
+
+        try {
+            const response = await fetch("https://example.com" || "", {
+                method: "POST",
+                body: formData,
+            });
+            console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
     return (
         <>
             <Head>
                 <title>Create Post | dnrm</title>
             </Head>
-            <div className="gradient-1 filter blur-3xl bg-teal opacity-20 absolute w-1/2 h-56 rounded-r-full -top-10 -left-8 -z-10"></div>
+            {/* <div className="gradient-1 filter blur-3xl bg-teal opacity-20 absolute w-1/2 h-56 rounded-r-full -top-10 -left-8 -z-10"></div>
             <div className="gradient-1 filter blur-3xl bg-neon opacity-20 absolute w-96 h-2/3 top-28 -left-16 -z-10"></div>
-            <div className="gradient-1 filter blur-3xl bg-red-400 opacity-40 absolute w-96 h-72 rounded-r-full top-20 left-32 -z-10"></div>
+            <div className="gradient-1 filter blur-3xl bg-red-400 opacity-40 absolute w-96 h-72 rounded-r-full top-20 left-32 -z-10"></div> */}
             <Navbar />
             <main className="flex flex-col p-4 md:p-8">
                 <header className="flex items-center justify-between">
@@ -95,34 +123,92 @@ const Create = ({ session }: Props) => {
                         className="grid grid-cols-1 md:grid-cols-3 mt-4"
                     >
                         <div className="upload">
-                            <div className="shadow-md col-span-1 upload-image w-full h-96 bg-white rounded-lg border-dashed border-gray-400 border-2 flex flex-col justify-center items-center hover:bg-blue-100 hover:border-blue-300 hover:text-blue-500">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="64"
-                                    height="64"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke={"currentColor"}
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    className="hover:text-blue-500 feather w-16 h-16 feather-upload"
-                                >
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="17 8 12 3 7 8"></polyline>
-                                    <line x1="12" y1="3" x2="12" y2="15"></line>
-                                </svg>
-                                <h1 className="text-xl font-light text-center leading-6">
-                                    Drop image here or{" "}
-                                    <label
-                                        htmlFor="upload-image"
-                                        className="hover:underline font-bold"
-                                    >
-                                        select from device
-                                    </label>
-                                </h1>
+                            <div
+                                {...getRootProps()}
+                                className={
+                                    (isDragActive
+                                        ? "bg-blue-100 border-blue-300 text-blue-500"
+                                        : "bg-white border-gray-400") +
+                                    "shadow-md col-span-1 upload-image w-full h-96 rounded-lg border-dashed border-4 hover:bg-blue-100 hover:border-blue-300 hover:text-blue-500"
+                                }
+                            >
+                                {!files ? (
+                                    <div className="flex flex-col justify-center items-center h-full">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="64"
+                                            height="64"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke={"currentColor"}
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className={
+                                                "hover:text-blue-500 feather w-16 h-16 feather-upload"
+                                            }
+                                        >
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line
+                                                x1="12"
+                                                y1="3"
+                                                x2="12"
+                                                y2="15"
+                                            ></line>
+                                        </svg>
+                                        <h1
+                                            className={
+                                                "text-xl font-light text-center leading-6" +
+                                                (isDragActive
+                                                    ? "text-blue-500"
+                                                    : "")
+                                            }
+                                        >
+                                            Drop image here or{" "}
+                                            <span
+                                                className="hover:underline font-bold"
+                                            >
+                                                select from device
+                                            </span>
+                                        </h1>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div
+                                            className="cross relative top-0 left-0 h-0 z-10"
+                                            onClick={(e: any) => {
+                                                e.stopPropagation()
+                                                setFiles(null);
+                                            }}
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-8 w-8 bg-gray-200 m-2 rounded-md absolute text-gray-700 cursor-pointer"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2}
+                                                    d="M6 18L18 6M6 6l12 12"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <img
+                                            src={URL.createObjectURL(
+                                                Array.from(files)[0]
+                                            )}
+                                            className="h-full w-full object-cover rounded-lg z-0"
+                                            alt=""
+                                        />
+                                    </>
+                                )}
                             </div>
                             <input
+                                {...getInputProps()}
                                 type="file"
                                 name="upload-image"
                                 id="upload-image"
@@ -145,16 +231,16 @@ const Create = ({ session }: Props) => {
                                 </div>
                                 <div className="group mt-4">
                                     <h2 className="text-3xl font-semibold tracking-tighter">
-                                        Description
+                                        Content
                                     </h2>
                                     <textarea
                                         name="content"
                                         id=""
                                         ref={contentRef}
                                         cols={30}
-                                        rows={5}
+                                        rows={7}
                                         placeholder="The start of a great story..."
-                                        className="mt-1 p-2 font-lg outline-none w-full border-2 border-gray-300 rounded-lg shadow-md resize-none focus:border-blue-400"
+                                        className="font-mono mt-1 p-2 font-lg outline-none w-full border-2 border-gray-300 rounded-lg shadow-md resize-none focus:border-blue-400"
                                     ></textarea>
                                 </div>
                             </div>
@@ -186,6 +272,9 @@ const Create = ({ session }: Props) => {
                     </section>
                 </form>
             </main>
+            <br />
+            <br />
+            <Footer />
         </>
     );
 };
