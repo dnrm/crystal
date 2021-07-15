@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Link from "next/link";
 import { GetServerSidePropsContext } from "next";
 import Post from "../components/Post";
+import Footer from "../components/Footer";
 
 export default function Login(props: any) {
     const [session] = useSession();
@@ -121,6 +122,8 @@ export default function Login(props: any) {
                     )}
                 </section>
             </main>
+            <br />
+            <Footer />
         </>
     );
 }

@@ -107,9 +107,6 @@ const Create = ({ session }: Props) => {
             <Head>
                 <title>Create Post | dnrm</title>
             </Head>
-            {/* <div className="gradient-1 filter blur-3xl bg-teal opacity-20 absolute w-1/2 h-56 rounded-r-full -top-10 -left-8 -z-10"></div>
-            <div className="gradient-1 filter blur-3xl bg-neon opacity-20 absolute w-96 h-2/3 top-28 -left-16 -z-10"></div>
-            <div className="gradient-1 filter blur-3xl bg-red-400 opacity-40 absolute w-96 h-72 rounded-r-full top-20 left-32 -z-10"></div> */}
             <Navbar />
             <main className="flex flex-col p-4 md:p-8">
                 <header className="flex items-center justify-between">
