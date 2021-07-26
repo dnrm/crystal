@@ -1,8 +1,10 @@
 import React, { FormEvent, useRef, useCallback, useState } from "react";
-import { getSession } from "next-auth/client";
-import Navbar from "../components/Navbar";
 import Head from "next/head";
+import { getSession } from "next-auth/client";
 import { useDropzone } from "react-dropzone";
+import { useToasts } from 'react-toast-notifications'
+
+import Navbar from "../components/Navbar";
 import Footer from '../components/Footer';
 
 // * Types
@@ -20,6 +22,8 @@ interface Props {
 const Create = ({ session }: Props) => {
     const titleRef: any = useRef();
     const contentRef: any = useRef();
+
+    const { addToast } = useToasts()
 
     const [files, setFiles] = useState<FileList | null>();
 
@@ -45,6 +49,10 @@ const Create = ({ session }: Props) => {
             let content = contentRef.current.value;
 
             if (title == "" || content == "") {
+                addToast('Please fill out all input fields.', {
+                    appearance: 'info',
+                    autoDismiss: true,
+                })
                 return;
             }
 
@@ -57,14 +65,27 @@ const Create = ({ session }: Props) => {
                 });
                 files ? uploadImage(files) : null;
                 console.log(response);
+
+                if (response.ok) {
+                    addToast('Created post successfully :D', {
+                        appearance: 'success',
+                        autoDismiss: true
+                    })
+                } else {
+                    throw new Error('Unable to create post')
+                }
             } catch (e) {
                 console.log(e);
+                addToast('Unable to create post :c', {
+                    appearance: 'error',
+                    autoDismiss: true
+                })
             }
         }
     };
 
     const createPost = async ({ title, content, user }: Post) => {
-        let api = "/create-post";
+        let api = "/api/create-post";
 
         const response = fetch(api, {
             method: "POST",
@@ -244,7 +265,7 @@ const Create = ({ session }: Props) => {
                                     ></textarea>
                                 </div>
                             </div>
-                            <div className="buttons flex justify-end">
+                            <div className="buttons flex justify-end mt-2">
                                 <button
                                     type="submit"
                                     className="px-12 py-3 bg-blue-500 hover:bg-blue-600 text-white shadow-2xl rounded-md outline-none"

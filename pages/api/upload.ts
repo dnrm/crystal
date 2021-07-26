@@ -23,7 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         })
 
         const params = {
-            Bucket: 'dnrm-kinesis',
+            Bucket: 'dnrm-crystal',
             Key: `hi`,
             ACL: 'public-read',
             Body: req.body
