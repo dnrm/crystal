@@ -19,9 +19,11 @@ const Post = ({ slug }: Props) => {
     return (
         <div>
             <Head>
-                <title>{ id.split('-') }</title>
+                {/* @ts-ignore */}
+                <title>{ id?.split('-') }</title>
             </Head>
-            <h1>{ id.split('-') }</h1>
+            {/* @ts-ignore */}
+            <h1>{ id?.split('-') }</h1>
         </div>
     )
 }
