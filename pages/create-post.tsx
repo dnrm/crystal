@@ -2,10 +2,11 @@ import React, { FormEvent, useRef, useCallback, useState } from "react";
 import Head from "next/head";
 import { getSession } from "next-auth/client";
 import { useDropzone } from "react-dropzone";
-import { useToasts } from 'react-toast-notifications'
+import { useToasts } from "react-toast-notifications";
 
 import Navbar from "../components/Navbar";
-import Footer from '../components/Footer';
+import Footer from "../components/Footer";
+import router from "next/router";
 
 // * Types
 
@@ -23,11 +24,27 @@ const Create = ({ session }: Props) => {
     const titleRef: any = useRef();
     const contentRef: any = useRef();
 
-    const { addToast } = useToasts()
+    const { addToast } = useToasts();
 
     const [files, setFiles] = useState<FileList | null>();
+    const [mediaType, setMediaType] = useState<string>();
 
     const onDrop = useCallback(async (acceptedFiles) => {
+
+        if (!acceptedFiles[0].name.match(/.(jpg|jpeg|png|gif|mp4)$/i)) {
+            addToast('File is not an image or video.', {
+                appearance: 'error',
+                autoDismiss: true
+            })
+            return;
+        }
+
+        if (acceptedFiles[0].type === "video/mp4") {
+            setMediaType("video/mp4");
+        } else {
+            setMediaType(acceptedFiles[0].type);
+        }
+
         await setFiles(acceptedFiles);
     }, []);
 
@@ -44,48 +61,48 @@ const Create = ({ session }: Props) => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (session) {
-
             let title = titleRef.current.value;
             let content = contentRef.current.value;
 
             if (title == "" || content == "") {
-                addToast('Please fill out all input fields.', {
-                    appearance: 'info',
+                addToast("Please fill out all input fields.", {
+                    appearance: "info",
                     autoDismiss: true,
-                })
+                });
                 return;
             }
 
             try {
-                let response = await createPost({
-                    title,
-                    content,
-                    // @ts-ignore
-                    user: session.user?.email,
-                });
                 files ? uploadImage(files) : null;
-                console.log(response);
+                // let response = await createPost({
+                //     title,
+                //     content,
+                //     // @ts-ignore
+                //     user: session.user?.email,
+                // });
+                // console.log(response);
 
-                if (response.ok) {
-                    addToast('Created post successfully :D', {
-                        appearance: 'success',
-                        autoDismiss: true
-                    })
-                } else {
-                    throw new Error('Unable to create post')
-                }
+                // if (response.ok) {
+                //     addToast("Created post successfully :D", {
+                //         appearance: "success",
+                //         autoDismiss: true,
+                //     });
+                //     router.push('/dashboard')
+                // } else {
+                //     throw new Error("Unable to create post");
+                // }
             } catch (e) {
                 console.log(e);
-                addToast('Unable to create post :c', {
-                    appearance: 'error',
-                    autoDismiss: true
-                })
+                addToast("Unable to create post :(", {
+                    appearance: "error",
+                    autoDismiss: true,
+                });
             }
         }
     };
 
     const createPost = async ({ title, content, user }: Post) => {
-        let api = "/api/create-post";
+        let api = "/api/create";
 
         const response = fetch(api, {
             method: "POST",
@@ -93,8 +110,8 @@ const Create = ({ session }: Props) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name: title,
-                lastname: content,
+                title: title,
+                content: content,
                 user,
             }),
         });
@@ -116,9 +133,9 @@ const Create = ({ session }: Props) => {
             const response = await fetch("/api/upload", {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    "Content-Type": "application/x-www-form-urlencoded",
                 },
-                body: formData
+                body: formData,
             });
             console.log(response);
         } catch (e) {
@@ -187,9 +204,7 @@ const Create = ({ session }: Props) => {
                                             }
                                         >
                                             Drop image here or{" "}
-                                            <span
-                                                className="hover:underline font-bold"
-                                            >
+                                            <span className="hover:underline font-bold">
                                                 select from device
                                             </span>
                                         </h1>
@@ -199,7 +214,7 @@ const Create = ({ session }: Props) => {
                                         <div
                                             className="cross relative top-0 left-0 h-0 z-10"
                                             onClick={(e: any) => {
-                                                e.stopPropagation()
+                                                e.stopPropagation();
                                                 setFiles(null);
                                             }}
                                         >
@@ -218,13 +233,23 @@ const Create = ({ session }: Props) => {
                                                 />
                                             </svg>
                                         </div>
-                                        <img
-                                            src={URL.createObjectURL(
-                                                Array.from(files)[0]
-                                            )}
+                                        {mediaType !== "video/mp4" ? (
+                                            <img
+                                                src={URL.createObjectURL(
+                                                    Array.from(files)[0]
+                                                )}
+                                                className="h-full w-full object-cover rounded-lg z-0"
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <video
+                                            controls
                                             className="h-full w-full object-cover rounded-lg z-0"
-                                            alt=""
-                                        />
+                                                src={URL.createObjectURL(
+                                                    Array.from(files)[0]
+                                                )}
+                                            ></video>
+                                        )}
                                     </>
                                 )}
                             </div>

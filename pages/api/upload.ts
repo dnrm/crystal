@@ -1,42 +1,25 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { S3 } from 'aws-sdk'
-const multer = require('multer');
-
-const upload = multer({
-    dest: 'images'
-})
+import nextConnect from "next-connect";
+import middleware from '../../middleware/middleware'
 
 export const config = {
     api: {
-        bodyParser: {
-            sizeLimit: '2mb',
-        }
+        bodyParser: false
     }
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-    console.log(req.body)
+const handler = nextConnect()
+
+handler.use(middleware)
+
+handler.post(async (req: any, res: any) => {
     try {
-        const s3 = new S3({
-            accessKeyId: process.env.AWS_ACCESS_KEY,
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-        })
+        const files = req?.files
+        const body = req?.body
 
-        const params = {
-            Bucket: 'dnrm-crystal',
-            Key: `hi`,
-            ACL: 'public-read',
-            Body: req.body
-        }
-
-        s3.upload(params, (err: any, data: any) => {
-            console.log(err)
-            console.log(data)
-        })
-
-        res.send(200)
+        console.log(body)
+        res.send(body)
     } catch (e) {
         console.log(e)
         res.send(e)
     }
-};
+})
