@@ -30,12 +30,11 @@ const Create = ({ session }: Props) => {
     const [mediaType, setMediaType] = useState<string>();
 
     const onDrop = useCallback(async (acceptedFiles) => {
-
         if (!acceptedFiles[0].name.match(/.(jpg|jpeg|png|gif|mp4)$/i)) {
-            addToast('File is not an image or video.', {
-                appearance: 'error',
-                autoDismiss: true
-            })
+            addToast("File is not an image or video.", {
+                appearance: "error",
+                autoDismiss: true,
+            });
             return;
         }
 
@@ -73,26 +72,49 @@ const Create = ({ session }: Props) => {
             }
 
             try {
-                files ? uploadImage(files) : null;
-                // let response = await createPost({
-                //     title,
-                //     content,
-                //     // @ts-ignore
-                //     user: session.user?.email,
-                // });
-                // console.log(response);
+                const file = files ? files[0] : null;
+                const filename = encodeURIComponent(file?.name || "");
+                const res = await fetch(`/api/upload?file=${filename}`);
+                const { url, fields } = await res.json();
+                console.log(url, fields);
+                const formData = new FormData();
 
-                // if (response.ok) {
-                //     addToast("Created post successfully :D", {
-                //         appearance: "success",
-                //         autoDismiss: true,
-                //     });
-                //     router.push('/dashboard')
-                // } else {
-                //     throw new Error("Unable to create post");
-                // }
+                Object.entries({ ...fields, file }).forEach(
+                    ([key, value]: any) => {
+                        formData.append(key, value);
+                    }
+                );
+
+                const upload = await fetch(url, {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (upload.ok) {
+                    console.log("Uploaded successfully!");
+                } else {
+                    console.error("Upload failed.");
+                }
+
+                let response = await createPost({
+                    title,
+                    content,
+                    // @ts-ignore
+                    user: session.user?.email,
+                });
+                console.log(response);
+
+                if (response.ok) {
+                    addToast("Created post successfully :D", {
+                        appearance: "success",
+                        autoDismiss: true,
+                    });
+                    router.push('/dashboard')
+                } else {
+                    throw new Error("Unable to create post");
+                }
             } catch (e) {
-                console.log(e);
+                console.log('Error:', e);
                 addToast("Unable to create post :(", {
                     appearance: "error",
                     autoDismiss: true,
@@ -117,30 +139,6 @@ const Create = ({ session }: Props) => {
         });
 
         return response;
-    };
-
-    const uploadImage = async (fileList: FileList) => {
-        console.log(fileList);
-
-        let formData = new FormData();
-
-        Array.from(fileList).forEach((i) => {
-            console.log(i);
-            formData.append("image", i, i.name);
-        });
-
-        try {
-            const response = await fetch("/api/upload", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: formData,
-            });
-            console.log(response);
-        } catch (e) {
-            console.log(e);
-        }
     };
 
     return (
@@ -243,8 +241,8 @@ const Create = ({ session }: Props) => {
                                             />
                                         ) : (
                                             <video
-                                            controls
-                                            className="h-full w-full object-cover rounded-lg z-0"
+                                                controls
+                                                className="h-full w-full object-cover rounded-lg z-0"
                                                 src={URL.createObjectURL(
                                                     Array.from(files)[0]
                                                 )}
