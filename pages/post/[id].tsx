@@ -24,23 +24,23 @@ const Post: React.FC = () => {
                 </title>
             </Head>
             <Navbar />
-            <main className="flex flex-col p-4 md:p-8 border-t-2 border-gray-300">
-                <div className="image h-48">
+            <main className="flex flex-col border-t-2 border-gray-300">
+                <div className="image h-48 p-0 mt-2 md:mt-8 md:mx-8">
                     <img
                         src="https://source.unsplash.com/random?nature"
                         className="h-full w-full object-cover"
                         alt=""
                     />
                 </div>
-                <header className="px-0 md:px-16 pt-0 md:pt-4 flex items-center justify-center">
-                    <h1 className="text-2xl md:text-4xl lg:text-6xl tracking-tighter font-bold text-black py-5 max-w-4xl">
+                <header className="px-0 md:px-16 flex items-center justify-center">
+                    <h1 className="px-2 py-4 md:px-0 text-4xl md:text-4xl lg:text-6xl tracking-tighter font-bold text-black max-w-4xl">
                         {/* @ts-ignore */}
                         { title }
                     </h1>
                 </header>
                 <section
                     id="post-container"
-                    className="px-0 md:px-16 w-full flex justify-center items-center"
+                    className="px-2 md:p-0 md:px-16 w-full flex justify-center items-center"
                 >
                     <div className="max-w-4xl">
                         <p className="py-2">
