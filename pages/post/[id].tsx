@@ -33,7 +33,7 @@ const Post: React.FC = () => {
                     />
                 </div>
                 <header className="px-0 md:px-16 flex items-center justify-center">
-                    <h1 className="px-2 py-4 md:px-0 text-4xl md:text-4xl lg:text-6xl tracking-tighter font-bold text-black max-w-4xl">
+                    <h1 className="px-2 py-6 md:px-0 text-4xl md:text-4xl lg:text-6xl tracking-tighter font-bold text-black max-w-4xl">
                         {/* @ts-ignore */}
                         { title }
                     </h1>
