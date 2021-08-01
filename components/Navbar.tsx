@@ -34,7 +34,7 @@ const Navbar = () => {
                     </li>
                 </div>
                 {session && (
-                    <Link href={`/dashboard`}>
+                    <Link href={`/account`}>
                         <a className="flex flex-row justify-between items-center">
                             {/* @ts-ignore */}
                             <p className="text-sm text-gray-500 filter drop-shadow-xl hidden md:block">
