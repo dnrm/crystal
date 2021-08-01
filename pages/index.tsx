@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import src from "../images/bg-nyc.jpg";
+import src from "../images/bg-au.jpg";
 import Users from "../components/Users";
 import Link from "next/link";
 import Footer from "../components/Footer";
