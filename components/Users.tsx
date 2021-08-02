@@ -48,6 +48,7 @@ const Users = () => {
                                     />
                                 </svg>
                             </div>
+                            <span className="hidden">{i.content}</span>
                         </a>
                     </div>
                 );
