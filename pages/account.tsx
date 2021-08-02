@@ -25,7 +25,7 @@ const Account = ({ session }: any) => {
                     </h1>
                 </header>
                 <hr className="border-1 border-gray-300" />
-                <div className="flex justify-start gap-8 items-center mt-8 profile-picture p-4 bg-cover" style={{ backgroundImage: 'url("https://source.unsplash.com/random?wallpaper)' }}>
+                <div className="flex justify-start gap-8 items-center mt-8 profile-picture p-4 bg-cover" style={{ backgroundImage: 'url("https://source.unsplash.com/collection/94997000/)' }}>
                     <img src={session ? session?.user?.image : ''} className="ml-4 w-40 rounded-full border-4 border-white shadow-2xl" alt="" />
                     <h1 className="text-8xl font-bold text-white py-2 px-4 bg-black bg-opacity-50 rounded-lg">{name}</h1>
                 </div>
