@@ -29,8 +29,8 @@ export default function Home() {
                     <script
                         src="https://kit.fontawesome.com/d465d5991c.js"
                         crossOrigin="anonymous"
+                        defer={true}
                     ></script>
-                    <link rel="preload" as="image" href={'../images/bg-au.jpg'} />
                 </Head>
                 <header className={`flex items-center justify-between`}>
                     <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-bold text-black py-5">
@@ -63,7 +63,7 @@ export default function Home() {
                     </div>
                 </header>
                 <section>
-                    <Image src={src} alt="Cover image" layout="responsive" placeholder="blur" />
+                    <Image src={src} alt="Cover image" layout="responsive" priority={true} placeholder="blur" />
                 </section>
                 <section id="users">
                     <h1 className="text-4xl md:text-6xl lg:text-8xl tracking-tighter font-bold text-black pt-8 pb-2">

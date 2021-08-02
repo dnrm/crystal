@@ -7,27 +7,11 @@ import { ToastProvider } from "react-toast-notifications";
 
 function MyApp({ Component, pageProps, router }: AppProps) {
     return (
-        <AnimateSharedLayout>
-            <Provider session={pageProps.session}>
-                <motion.div
-                    key={router.route}
-                    initial="pageInitial"
-                    animate="pageAnimate"
-                    variants={{
-                        pageInitial: {
-                            opacity: 0,
-                        },
-                        pageAnimate: {
-                            opacity: 1,
-                        },
-                    }}
-                >
-                    <ToastProvider>
-                        <Component {...pageProps} />
-                    </ToastProvider>
-                </motion.div>
-            </Provider>
-        </AnimateSharedLayout>
+        <Provider session={pageProps.session}>
+            <ToastProvider>
+                <Component {...pageProps} />
+            </ToastProvider>
+        </Provider>
     );
 }
 export default MyApp;
