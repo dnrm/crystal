@@ -27,7 +27,7 @@ const Users = () => {
                                     <h1 className="text-xl sm:text-2xl font-bold tracking-tighter hover:underline">
                                         {i.content}
                                     </h1>
-                                    <h3 className="text-sm sm:text-md">{new Date(i.date).toDateString() + ' ' + new Date(i.date).toLocaleTimeString()}</h3>
+                                    <h2 className="text-sm sm:text-md">{new Date(i.date).toDateString() + ' ' + new Date(i.date).toLocaleTimeString()}</h2>
                                 </div>
                             </a>
                         </Link>
@@ -48,6 +48,7 @@ const Users = () => {
                                     />
                                 </svg>
                             </div>
+                            <span className="hidden">{i.content}</span>
                         </a>
                     </div>
                 );

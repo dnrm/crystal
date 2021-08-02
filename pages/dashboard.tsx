@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { signIn, signOut, useSession, getSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
@@ -9,9 +9,8 @@ import Footer from "../components/Footer";
 
 export default function Login(props: any) {
     const [session] = useSession();
-
-    const [layout, setLayout] = useState<string>("column");
-
+    const [layout, setLayout] = useState<string>('column');
+    
     const toggleLayout = (e: any) => {
         layout === "column" ? setLayout("row") : setLayout("column");
     };
