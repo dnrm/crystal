@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@next-auth/fauna-adapter": "^0.2.2",
     "@types/formidable": "^1.2.3",
     "autoprefixer": "^10.2.6",
     "aws-sdk": "^2.946.0",

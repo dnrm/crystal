@@ -191,6 +191,11 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.0.tgz#f3933a44e365864f4dad5db94158106d511e8131"
   integrity sha512-sqKVVVOe5ivCaXDWivIJYVSaEgdQK9ul7a4Kity5Iw7u9+wBAPbX1RMSnLLmp7O4Vzj0WOWwMAJsTL00xwaNug==
 
+"@next-auth/fauna-adapter@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@next-auth/fauna-adapter/-/fauna-adapter-0.2.2.tgz#ffbc7f6ff169cdc74172537ab92c4e74db68f474"
+  integrity sha512-vN3vYK1AKiy2IG8HfT6YqOm2LI947LIt44HDup7B23CqlGjMoqfRljFqcIFyt/PyYjtn9uF8hYV88yWRFGHaZA==
+
 "@next-auth/prisma-legacy-adapter@0.0.1-canary.127":
   version "0.0.1-canary.127"
   resolved "https://registry.yarnpkg.com/@next-auth/prisma-legacy-adapter/-/prisma-legacy-adapter-0.0.1-canary.127.tgz#09223de6d0350e53afc4bd0dda056a2fde27d8d3"
