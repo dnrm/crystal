@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import src from "../images/mountains.jpg";
+import src from "../images/bg-au.jpg";
 import Users from "../components/Users";
 import Link from "next/link";
 import Footer from "../components/Footer";
@@ -72,7 +72,7 @@ export default function Home() {
                         layout="responsive"
                         priority={true}
                         placeholder="blur"
-                        blurDataURL="https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder-1024x512.png"
+                        blurDataURL={'/'}
                     />
                 </section>
                 <section id="users">
