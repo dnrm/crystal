@@ -4,7 +4,7 @@ import * as q from "faunadb";
 import { Client } from "faunadb";
 
 const client = new Client({
-    secret: process?.env?.FAUNA || "",
+    secret: process?.env?.FAUNADB_KEY || "",
 });
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

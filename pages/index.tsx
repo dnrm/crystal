@@ -6,7 +6,6 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useSession } from "next-auth/client";
-import style from "../styles/background.module.css";
 
 export default function Home() {
     const [session] = useSession();

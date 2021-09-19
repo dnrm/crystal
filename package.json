@@ -9,13 +9,14 @@
   },
   "dependencies": {
     "@next-auth/fauna-adapter": "^0.2.2",
+    "@tailwindcss/typography": "^0.4.1",
     "@types/formidable": "^1.2.3",
     "autoprefixer": "^10.2.6",
     "aws-sdk": "^2.946.0",
     "faunadb": "^4.3.0",
     "formidable": "^1.2.2",
     "framer-motion": "^4.1.17",
-    "mongodb": "^4.1.0",
+    "mongodb": "^3.5.9",
     "multer": "^1.4.2",
     "next": "^11.0.0",
     "next-auth": "^3.27.0",
@@ -24,7 +25,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.3.4",
+    "react-markdown": "^7.0.1",
     "react-toast-notifications": "^2.5.1",
+    "swr": "^1.0.1",
     "tailwindcss": "^2.1.4"
   },
   "devDependencies": {
