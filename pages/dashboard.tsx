@@ -133,6 +133,7 @@ export default function Login(props: any) {
                           id={i.ref["@ref"].id}
                           title={i.data.title}
                           content={i.data.content}
+                          src={i.data["src"]}
                         ></Post>
                       );
                     })

@@ -24,10 +24,12 @@ const Post: React.FC = () => {
       </Head>
       <Navbar />
       <main className="flex flex-col border-t-2 border-gray-300">
-        <div className="image h-48 p-0 mt-2 md:mt-8 md:mx-8">
+        <div className="image h-48 p-0 mt-2 md:mt-8 md:mx-8 bg-black">
           <img
-            src="https://source.unsplash.com/random?nature"
-            className="h-full w-full object-cover"
+            src={
+              post?.data ? post.data.src : "https://source.unsplash.com/random"
+            }
+            className="h-full w-full object-cover opacity-50"
             alt=""
           />
         </div>

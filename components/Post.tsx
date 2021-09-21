@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface Props {
   src?: string;
@@ -10,35 +11,42 @@ interface Props {
 }
 
 const Post = ({ src, title, layout, content, id }: Props) => {
-
   return (
     <Link href={`/post/${id}`}>
       <a>
-        <div
-          className={`post bg-gray-100 rounded-lg p-4 ${
-            layout === "row"
-              ? "flex flex-col justify-start items-start"
-              : null
+        <motion.div
+          layout="position"
+          transition={{
+            duration: 0.3,
+          }}
+          className={`bg-gray-100 rounded-lg p-4 ${
+            layout === "row" ? "flex justify-start items-center" : null
           } ${
-            layout === "column" ? "h-full flex flex-col justify-start" : null
+            layout === "column"
+              ? "h-full flex flex-col items-start justify-start"
+              : null
           }`}
         >
           {src ? (
-            <div className="image h-full">
-              <img
-                src={src}
-                alt=""
-                className="h-full object-cover rounded-md mr-2 p-2"
-              />
-            </div>
+            <img
+              src={src}
+              alt=""
+              className={`object-center rounded-md object-cover ${
+                layout === "row" ? "mr-2 w-16 h-16 mb-0" : "mb-4"
+              }`}
+            />
           ) : null}
-          <h1
-            className={`font-semibold text-lg leading-5 ${layout === "row" ? 'mr-2' : 'mr-0'}`}
-          >
-            {title}
-          </h1>
-          <p className="text-sm truncate max-w-full">{content}</p>
-        </div>
+          <div className="flex flex-col w-full break-all overflow-hidden">
+            <h1
+              className={`font-semibold text-lg leading-5 ${
+                layout === "row" ? "mr-2 min-w-max" : "mr-0"
+              }`}
+            >
+              {title}
+            </h1>
+            <p className="text-sm truncate max-w-full">{content}</p>
+          </div>
+        </motion.div>
       </a>
     </Link>
   );
