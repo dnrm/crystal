@@ -32,7 +32,7 @@ const Post = ({ src, title, layout, content, id }: Props) => {
               src={src}
               alt=""
               className={`object-center rounded-md object-cover ${
-                layout === "row" ? "mr-2 w-16 h-16 mb-0" : "mb-4"
+                layout === "row" ? "mr-2 w-16 h-16 mb-0" : "mb-4 h-48 w-full"
               }`}
             />
           ) : null}
