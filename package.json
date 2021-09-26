@@ -25,8 +25,10 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.3.4",
+    "react-hot-toast": "^2.1.1",
     "react-markdown": "^7.0.1",
     "react-toast-notifications": "^2.5.1",
+    "spinners-react": "^1.0.4",
     "swr": "^1.0.1",
     "tailwindcss": "^2.1.4"
   },
