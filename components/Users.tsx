@@ -18,7 +18,6 @@ const Users = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-6">
             {users.map((i) => {
-                console.log(i.date)
                 return (
                     <div
                         className="user-container p-4 shadow-sm rounded-md border-gray-200 border-2 hover:bg-gray-100 flex justify-between items-center"
