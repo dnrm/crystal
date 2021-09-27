@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import Users from "../components/Users";
-import src from '../images/cover.jpg'
 import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
