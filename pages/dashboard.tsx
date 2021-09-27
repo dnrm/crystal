@@ -126,14 +126,14 @@ export default function Login(props: any) {
                 }`}
               >
                 {posts
-                  ? posts?.data?.map((i: any) => {
+                  ? posts.map((i: any) => {
                       return (
                         <Post
                           layout={layout}
-                          id={i.ref["@ref"].id}
-                          title={i.data.title}
-                          content={i.data.content}
-                          src={i.data["src"]}
+                          id={i._id}
+                          title={i.title}
+                          content={i.content}
+                          src={i.src}
                         ></Post>
                       );
                     })

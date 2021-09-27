@@ -1,23 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import {
-  Client,
-  Map,
-  Paginate,
-  Documents,
-  Collection,
-  Lambda,
-  Get,
-} from "faunadb";
+import { connectToDatabase } from '../../lib/mongodb' 
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const client = new Client({ secret: process.env.FAUNADB_KEY || "" });
+  const { db } = await connectToDatabase()
 
-  const posts = await client.query(
-    Map(
-      Paginate(Documents(Collection("posts"))),
-      Lambda((x) => Get(x))
-    )
-  );
+  const posts = await db.collection('posts').find({}).toArray()
 
   res.send(posts);
 };

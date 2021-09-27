@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { SpinnerCircular } from "spinners-react";
 import { MongoClient } from "mongodb";
 import Image from "next/image";
+import { connectToDatabase } from "../lib/mongodb";
 
 const Account = ({ session, user }: any) => {
   const [name, setName] = useState(user.name);
@@ -14,18 +15,6 @@ const Account = ({ session, user }: any) => {
   const [bio, setBio] = useState(user.bio);
 
   const [updating, setUpdating] = useState(false);
-
-  useEffect(() => {
-    const get = async () => {
-      const response = await fetch("/api/get-user");
-      const json = await response.json();
-      setUsername(json.username ? json.username : "");
-      setName(json.name ? json.name : "");
-      setBio(json.bio ? json.bio : "");
-    };
-
-    get();
-  }, []);
 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
@@ -187,12 +176,11 @@ export default Account;
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
 
-  const client = new MongoClient(process.env.DATABASE_URL || "");
+  const { client } = await connectToDatabase()
 
   if (session) {
     const email = session?.user?.email;
-    await client.connect();
-    let db = await client.db("auth");
+    const db = client.db('auth')
     let user = await db.collection("users").findOne({ email });
     user = JSON.parse(JSON.stringify(user));
     return {
