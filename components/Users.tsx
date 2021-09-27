@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import TimeAgo from 'react-timeago'
+import ReactTooltip from 'react-tooltip'
 
 const Users = () => {
     const [users, setUsers] = useState<Array<any>>([]);
@@ -16,6 +18,7 @@ const Users = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-6">
             {users.map((i) => {
+                console.log(i.date)
                 return (
                     <div
                         className="user-container p-4 shadow-sm rounded-md border-gray-200 border-2 hover:bg-gray-100 flex justify-between items-center"
@@ -27,7 +30,11 @@ const Users = () => {
                                     <h1 className="text-xl sm:text-2xl font-bold tracking-tighter hover:underline">
                                         {i.content}
                                     </h1>
-                                    <h2 className="text-sm sm:text-md">{new Date(i.date).toDateString() + ' ' + new Date(i.date).toLocaleTimeString()}</h2>
+                                    <h2 className="text-sm sm:text-md" data-tip data-for={i._id}>
+                                        Joined{" "}
+                                        <TimeAgo date={i.date}></TimeAgo>    
+                                    </h2>
+                                    <ReactTooltip getContent={() => new Date(i.date).toDateString()} id={i._id} type="info" />
                                 </div>
                             </a>
                         </Link>
