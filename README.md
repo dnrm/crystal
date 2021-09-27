@@ -7,7 +7,7 @@ Check out the live demo [here](https://crystal.medina.dev/) or deploy to Vercel:
 
 ## Technologies
 
-- Firebase
+- Typescript
 - Next.js
 - React
 - Tailwindcss
