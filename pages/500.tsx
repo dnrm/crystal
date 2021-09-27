@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Image from 'next/image';
-import src from '../images/boats.jpeg';
+import src from '../images/boats.jpg';
 
 const ServerError = () => {
     return (
