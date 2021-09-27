@@ -3,14 +3,15 @@ import Head from "next/head";
 import { getSession } from "next-auth/client";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useToasts } from "react-toast-notifications";
-import { Toast, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { SpinnerCircular } from "spinners-react";
+import { MongoClient } from "mongodb";
+import Image from "next/image";
 
-const Account = ({ session }: any) => {
-  const [name, setName] = useState(session?.user?.name);
-  const [username, setUsername] = useState();
-  const [bio, setBio] = useState();
+const Account = ({ session, user }: any) => {
+  const [name, setName] = useState(user.name);
+  const [username, setUsername] = useState(user.username);
+  const [bio, setBio] = useState(user.bio);
 
   const [updating, setUpdating] = useState(false);
 
@@ -81,13 +82,16 @@ const Account = ({ session }: any) => {
           </h1>
         </header>
         <hr className="border-1 border-gray-300" />
-        <div
-          className="flex justify-start gap-8 items-center mt-8 profile-picture p-4 bg-cover"
-          style={{
-            backgroundImage:
-              'url("https://source.unsplash.com/collection/94997000/)',
-          }}
-        >
+        <div className="flex justify-start gap-8 items-center mt-8 profile-picture bg-cover h-48 relative">
+          <div className="h-full w-full absolute -z-10">
+            <Image
+              className="object-cover"
+              layout="fill"
+              src={`https://images.unsplash.com/photo-1615752593047-30aa95f03882`}
+              blurDataURL={`https://images.unsplash.com/photo-1615752593047-30aa95f03882?&auto=format&fit=crop&w=435&q=5`}
+              placeholder="blur"
+            ></Image>
+          </div>
           <img
             src={session ? session?.user?.image : ""}
             className="ml-4 w-20 md:w-40 rounded-full border-4 border-white shadow-2xl"
@@ -182,6 +186,22 @@ export default Account;
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
+
+  const client = new MongoClient(process.env.DATABASE_URL || "");
+
+  if (session) {
+    const email = session?.user?.email;
+    await client.connect();
+    let db = await client.db("auth");
+    let user = await db.collection("users").findOne({ email });
+    user = JSON.parse(JSON.stringify(user));
+    return {
+      props: {
+        session,
+        user,
+      },
+    };
+  }
 
   return {
     props: {
