@@ -1,4 +1,4 @@
 module.exports = {
-    siteUrl: 'https://medina.dev',
+    siteUrl: 'https://crystal.medina.dev',
     generateRobotsTxt: false
 }
