@@ -35,11 +35,11 @@
     "react-tooltip": "^4.2.21",
     "spinners-react": "^1.0.4",
     "swr": "^1.0.1",
+    "next-sitemap": "^1.6.168",
     "tailwindcss": "^2.1.4"
   },
   "devDependencies": {
     "@types/react": "17.0.11",
-    "next-sitemap": "^1.6.168",
     "typescript": "4.3.2"
   }
 }
