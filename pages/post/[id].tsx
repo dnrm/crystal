@@ -20,7 +20,7 @@ const Post: React.FC = () => {
     <div>
       <Head>
         <title>
-          {post?.data?.title ? post.data.title : "Loading..."} | Crystal
+          {post?.title ? post.title : "Loading..."} | Crystal
         </title>
       </Head>
       <Navbar />
@@ -28,7 +28,7 @@ const Post: React.FC = () => {
         <div className="image h-48 p-0 mt-2 md:mt-8 md:mx-8 bg-black">
           <img
             src={
-              post?.data ? post.data.src : "https://source.unsplash.com/random"
+              post ? post.src : "https://source.unsplash.com/random"
             }
             className="h-full w-full object-cover opacity-50"
             alt=""
@@ -41,7 +41,7 @@ const Post: React.FC = () => {
           <div className="max-w-6xl pb-16 pt-8">
             {post ? (
               <div className="prose">
-                <ReactMarkdown>{post.data.content}</ReactMarkdown>
+                <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
             ) : null}
           </div>

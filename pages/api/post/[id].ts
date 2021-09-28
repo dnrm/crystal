@@ -1,16 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Client, Collection, Ref, Get } from "faunadb";
+import { connectToDatabase } from "../../../lib/mongodb";
+import { ObjectId } from "bson";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const client = new Client({ secret: process.env.FAUNADB_KEY || "" });
+  const { db } = await connectToDatabase();
+  console.log(req.query.id);
 
-  if (req.query.id == 'undefined') {
-    return res.status(404)
-  }
+  const post = await db
+    .collection("posts")
+    .find({ "_id": new ObjectId(req.query.id)})
+    .toArray()
 
-  const post = await client.query(
-    Get(Ref(Collection("posts"), req?.query?.id))
-  );
-
-  res.send(post);
+  res.send(post[0]);
 };
