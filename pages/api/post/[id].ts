@@ -5,7 +5,6 @@ import { ObjectId } from "bson";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
   const id: string = req.query.id.toString();
-  console.log(id);
 
   const post = await db
     .collection("posts")

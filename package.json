@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@next-auth/fauna-adapter": "^0.2.2",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@types/react": "17.0.11",
+    "next-sitemap": "^1.6.168",
     "typescript": "4.3.2"
   }
 }
