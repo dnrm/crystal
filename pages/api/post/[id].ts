@@ -4,12 +4,13 @@ import { ObjectId } from "bson";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
-  console.log(req.query.id);
+  const id: string = req.query.id.toString();
+  console.log(id);
 
   const post = await db
     .collection("posts")
-    .find({ "_id": new ObjectId(req.query.id)})
-    .toArray()
+    .find({ _id: new ObjectId(id) })
+    .toArray();
 
   res.send(post[0]);
 };
