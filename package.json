@@ -9,7 +9,6 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
-    "@next-auth/fauna-adapter": "^0.2.2",
     "@tailwindcss/typography": "^0.4.1",
     "@types/formidable": "^1.2.3",
     "@types/react-timeago": "^4.1.3",
@@ -17,7 +16,6 @@
     "aws-sdk": "^2.946.0",
     "bson": "^4.5.2",
     "cloudinary": "^1.27.0",
-    "faunadb": "^4.3.0",
     "formidable": "^1.2.2",
     "framer-motion": "^4.1.17",
     "mongodb": "^3.5.9",
