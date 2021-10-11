@@ -16,14 +16,17 @@
     "autoprefixer": "^10.2.6",
     "aws-sdk": "^2.946.0",
     "bson": "^4.5.2",
+    "cloudinary": "^1.27.0",
     "faunadb": "^4.3.0",
     "formidable": "^1.2.2",
     "framer-motion": "^4.1.17",
     "mongodb": "^3.5.9",
     "multer": "^1.4.2",
+    "multiparty": "^4.2.2",
     "next": "^11.0.0",
     "next-auth": "^3.27.0",
     "next-connect": "^0.10.2",
+    "next-sitemap": "^1.6.168",
     "postcss": "^8.3.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -35,10 +38,10 @@
     "react-tooltip": "^4.2.21",
     "spinners-react": "^1.0.4",
     "swr": "^1.0.1",
-    "next-sitemap": "^1.6.168",
     "tailwindcss": "^2.1.4"
   },
   "devDependencies": {
+    "@types/multiparty": "^0.0.33",
     "@types/react": "17.0.11",
     "typescript": "4.3.2"
   }

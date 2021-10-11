@@ -14,6 +14,7 @@ interface Post {
   title: string;
   content: string;
   user: string;
+  src?: string
 }
 
 interface Props {
@@ -72,35 +73,37 @@ const Create = ({ session }: Props) => {
       }
 
       try {
+
+        let secure_url = ''
+
         if (files) {
-          const file = files ? files[0] : null;
-          const filename = encodeURIComponent(file?.name || "");
-          const res = await fetch(`/api/upload?file=${filename}`);
-          const { url, fields } = await res.json();
-          console.log(url, fields);
-          const formData = new FormData();
 
-          Object.entries({ ...fields, file }).forEach(([key, value]: any) => {
-            formData.append(key, value);
-          });
-
-          const upload = await fetch(url, {
+          const formData = new FormData()
+          formData.append('image', files[0])
+          const upload = await fetch('/api/upload-image', {
             method: "POST",
             body: formData,
           });
 
+          const json = await upload.json()
+          secure_url = json.secure_url
+
+          
           if (upload.ok) {
-            console.log("Uploaded successfully!");
+            console.log("Image uploaded successfully!");
+            console.log(json)
           } else {
-            console.error("Upload failed.");
+            console.error("Image upload failed.");
           }
         }
+        console.log(secure_url)
 
         let response = await createPost({
           title,
           content,
           // @ts-ignore
           user: session.user?.email,
+          src: secure_url
         });
         console.log(response);
 
@@ -123,7 +126,7 @@ const Create = ({ session }: Props) => {
     }
   };
 
-  const createPost = async ({ title, content, user }: Post) => {
+  const createPost = async ({ title, content, user, src }: Post) => {
     let api = "/api/create";
 
     const response = fetch(api, {
@@ -135,6 +138,7 @@ const Create = ({ session }: Props) => {
         title: title,
         content: content,
         user,
+        src
       }),
     });
 
