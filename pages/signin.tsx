@@ -1,9 +1,13 @@
 import { getProviders, signIn } from "next-auth/client";
 import Navbar from "../components/Navbar";
+import Head from 'next/head'
 
 export default function SignIn({ providers }: any) {
     return (
         <>
+        <Head>
+            <title>Signin | Crystal</title>
+        </Head>
         <Navbar />
             <main className="flex flex-col p-8">
                 <div className="flex items-center justify-between">
