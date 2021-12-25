@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import { MongoClient } from "mongodb";
 
-const client = new MongoClient(process.env.DATABASE_URL || "");
+const client = new MongoClient(process.env.MONGODB_URI || "");
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await getSession({ req });
