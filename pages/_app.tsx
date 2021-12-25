@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       <PostsWrapper>
         <ToastProvider>
           <Component {...pageProps} />
-          <Toaster position={`top-right`} toastOptions={{ duration: 5000 }}/>
+          <Toaster position={`top-right`} toastOptions={{ duration: 5000 }} />
         </ToastProvider>
       </PostsWrapper>
     </Provider>

@@ -39,7 +39,7 @@ const Navbar = () => {
                             {/* @ts-ignore */}
                             <p className="text-sm text-gray-500 filter drop-shadow-xl hidden md:block">
                                 {/* @ts-ignore */}
-                                {session.user.email}
+                                {session.user.name ? session.user.name : session.user.email}
                             </p>
                             <img
                                 // @ts-ignore
