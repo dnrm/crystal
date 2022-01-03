@@ -15,6 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const email = session?.user?.email;
+    console.log(session)
     await client.connect();
     let db = await client.db("auth");
     let doc = await db.collection("users").findOne({ email });

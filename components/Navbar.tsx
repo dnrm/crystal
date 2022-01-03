@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import styles from "../styles/fonts.module.css";
 import { useSession } from "next-auth/client";
+import { useUserContext } from "../context/user";
 
 const Navbar = () => {
     const [session] = useSession();
+    let user = useUserContext();
+
+    console.log(user)
 
     return (
         <nav>

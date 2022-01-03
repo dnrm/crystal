@@ -116,29 +116,42 @@ export default function Login(props: any) {
                   </Link>
                 </div>
               </div>
-              <div
-                className={`posts ${
-                  layout === "row" ? "grid grid-cols-1 gap-4" : null
-                } ${
-                  layout === "column"
-                    ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
-                    : null
-                }`}
-              >
-                {posts
-                  ? posts.map((i: any) => {
-                      return (
-                        <Post
-                          layout={layout}
-                          id={i._id}
-                          title={i.title}
-                          content={i.content}
-                          src={i.src}
-                        ></Post>
-                      );
-                    })
-                  : null}
-              </div>
+              {posts && posts.length > 0 ? (
+                <div
+                  className={`posts ${
+                    layout === "row" ? "grid grid-cols-1 gap-4" : null
+                  } ${
+                    layout === "column"
+                      ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+                      : null
+                  }`}
+                >
+                  {posts
+                    ? posts.map((i: any) => {
+                        return (
+                          <Post
+                            layout={layout}
+                            id={i._id}
+                            title={i.title}
+                            content={i.content}
+                            src={i.src}
+                          ></Post>
+                        );
+                      })
+                    : null}
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4 justify-center items-center h-96">
+                  <h1 className="text-4xl font-bold w-full text-center">
+                    Create your first post!
+                  </h1>
+                  <Link href={`/create-post`}>
+                    <a className="py-6 px-20 bg-blue-500 text-white text-xl inline-block shadow-xl hover:shadow-xl rounded-xl transition-all duration-200">
+                      Create Post
+                    </a>
+                  </Link>
+                </div>
+              )}
             </div>
           ) : (
             <div className="login-form w-auto h-80 flex flex-col justify-center items-center text-center">

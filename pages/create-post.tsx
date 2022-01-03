@@ -14,7 +14,7 @@ interface Post {
   title: string;
   content: string;
   user: string;
-  src?: string
+  src?: string;
 }
 
 interface Props {
@@ -73,37 +73,34 @@ const Create = ({ session }: Props) => {
       }
 
       try {
-
-        let secure_url = ''
+        let secure_url = "";
 
         if (files) {
-
-          const formData = new FormData()
-          formData.append('image', files[0])
-          const upload = await fetch('/api/upload-image', {
+          const formData = new FormData();
+          formData.append("image", files[0]);
+          const upload = await fetch("/api/upload-image", {
             method: "POST",
             body: formData,
           });
 
-          const json = await upload.json()
-          secure_url = json.secure_url
+          const json = await upload.json();
+          secure_url = json.secure_url;
 
-          
           if (upload.ok) {
             console.log("Image uploaded successfully!");
-            console.log(json)
+            console.log(json);
           } else {
             console.error("Image upload failed.");
           }
         }
-        console.log(secure_url)
+        console.log(secure_url);
 
         let response = await createPost({
           title,
           content,
           // @ts-ignore
           user: session.user?.email,
-          src: secure_url
+          src: secure_url,
         });
         console.log(response);
 
@@ -138,7 +135,7 @@ const Create = ({ session }: Props) => {
         title: title,
         content: content,
         user,
-        src
+        src,
       }),
     });
 
@@ -158,8 +155,11 @@ const Create = ({ session }: Props) => {
           </h1>
         </header>
         <form onSubmit={handleSubmit}>
-          <section id="form" className="grid grid-cols-1 md:grid-cols-3 mt-4">
-            <div className="upload">
+          <section
+            id="form"
+            className="grid grid-cols-1 md:grid-cols-1 mt-4 max-w-6xl mx-auto"
+          >
+            <div className="upload pl-0 md:pl-8 mb-4">
               <div
                 {...getRootProps()}
                 className={
@@ -272,7 +272,7 @@ const Create = ({ session }: Props) => {
                     id=""
                     ref={contentRef}
                     cols={30}
-                    rows={7}
+                    rows={16}
                     placeholder="The start of a great story..."
                     className="font-mono mt-1 p-2 font-lg outline-none w-full border-2 border-gray-300 rounded-lg shadow-md resize-none focus:border-blue-400"
                   ></textarea>

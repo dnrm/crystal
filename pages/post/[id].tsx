@@ -19,20 +19,18 @@ const Post: React.FC = () => {
   return (
     <div>
       <Head>
-        <title>
-          {post?.title ? post.title : "Loading..."} | Crystal
-        </title>
+        <title>{post?.title ? post.title : "Loading..."} | Crystal</title>
       </Head>
       <Navbar />
-      <main className="flex flex-col border-t-2 border-gray-300">
-        <div className="image h-48 p-0 mt-2 md:mt-8 md:mx-8 bg-black">
-          <img
-            src={
-              post ? post.src : "https://source.unsplash.com/random"
-            }
-            className="h-full w-full object-cover opacity-50"
-            alt=""
-          />
+      <main className="flex flex-col items-center border-t-2 border-gray-300">
+        <div className="image h-96 p-0 mt-2 md:mt-8 bg-black">
+          {post && (
+            <img
+              src={post ? post.src : "https://source.unsplash.com/random"}
+              className="h-full w-full object-cover opacity-100"
+              alt=""
+            />
+          )}
         </div>
         <section
           id="post-container"
@@ -55,20 +53,20 @@ const Post: React.FC = () => {
 export default Post;
 
 export async function getServerSideProps(context: any) {
-  const session = await getSession(context)
+  const session = await getSession(context);
 
   if (session) {
     return {
       props: {
-        session
-      }
-    }
+        session,
+      },
+    };
   } else {
     return {
       redirect: {
-        destination: '/signin',
-        permanent: false
-      }
-    }
+        destination: "/signin",
+        permanent: false,
+      },
+    };
   }
 }
