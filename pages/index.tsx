@@ -71,7 +71,7 @@ export default function Home() {
                         layout="responsive"
                         priority={true}
                         placeholder="blur"
-                        blurDataURL={'/'}
+                        blurDataURL={'/boats-min.jpg'}
                     />
                 </section>
                 <section id="users">
