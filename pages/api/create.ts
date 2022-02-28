@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/client";
-import { connectToDatabase } from "../../lib/mongodb";
+import { getSession } from "next-auth/react";
+import { connectToDatabase } from "../../lib/mongodb-old";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();

@@ -4,11 +4,11 @@ import Users from "../components/Users";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import src from '../images/boats.jpg'
 
 export default function Home() {
-    const [session] = useSession();
+    const { data: session } = useSession();
 
     return (
         <>

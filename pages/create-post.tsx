@@ -1,6 +1,6 @@
 import React, { FormEvent, useRef, useCallback, useState } from "react";
 import Head from "next/head";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import { useDropzone } from "react-dropzone";
 import { useToasts } from "react-toast-notifications";
 

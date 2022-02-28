@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
 import Footer from "../../components/Footer";
-import { getSession } from "next-auth/client";
 
 const fetcher = (...args: [any]) => fetch(...args).then((res) => res.json());
 
@@ -51,22 +50,3 @@ const Post: React.FC = () => {
 };
 
 export default Post;
-
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
-
-  if (session) {
-    return {
-      props: {
-        session,
-      },
-    };
-  } else {
-    return {
-      redirect: {
-        destination: "/signin",
-        permanent: false,
-      },
-    };
-  }
-}

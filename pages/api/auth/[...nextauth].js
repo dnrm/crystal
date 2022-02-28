@@ -1,13 +1,16 @@
 import NextAuth from "next-auth";
-import Providers from "next-auth/providers";
+import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
+import clientPromise from "../../../lib/mongodb"
 
 export default NextAuth({
     providers: [
-        Providers.Google({
+        GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
-        Providers.GitHub({
+        GithubProvider({
             clientId: process.env.GITHUB_CLIENT_ID,
             clientSecret: process.env.GITHUB_CLIENT_SECRET,
         }),
@@ -15,9 +18,5 @@ export default NextAuth({
     pages: {
         signIn: "/signin",
     },
-    session: {
-        jwt: true,
-        maxAge: 30 * 24 * 60 * 60 
-    },
-    database: process.env.MONGODB_URI,
+    adapter: MongoDBAdapter(clientPromise),
 });

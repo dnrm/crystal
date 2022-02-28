@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import { MongoClient } from "mongodb";
 
 const client = new MongoClient(process.env.MONGODB_URI || "");

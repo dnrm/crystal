@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { signIn, signOut, useSession, getSession } from "next-auth/client";
+import { signIn, signOut, useSession, getSession } from "next-auth/react";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
 import { GetServerSidePropsContext } from "next";
@@ -9,7 +9,7 @@ import Footer from "../components/Footer";
 import { usePostsContext } from "../context/posts";
 
 export default function Login(props: any) {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const [layout, setLayout] = useState<string>("column");
   const posts: any = usePostsContext();
   console.log(posts);

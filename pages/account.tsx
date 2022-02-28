@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
 import { SpinnerCircular } from "spinners-react";
 import { MongoClient } from "mongodb";
 import Image from "next/image";
-import { connectToDatabase } from "../lib/mongodb";
+import { connectToDatabase } from "../lib/mongodb-old";
 
 const Account = ({ session, user }: any) => {
   const [name, setName] = useState(user.name);
@@ -82,7 +82,7 @@ const Account = ({ session, user }: any) => {
             ></Image>
           </div>
           <img
-            src={session ? session?.user?.image : ""}
+            src={user ? user.image : ""}
             className="ml-4 w-20 md:w-40 rounded-full border-4 border-white shadow-2xl"
             alt=""
           />
