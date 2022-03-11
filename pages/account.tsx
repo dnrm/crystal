@@ -13,6 +13,7 @@ const Account = ({ session, user }: any) => {
   const [name, setName] = useState(user.name);
   const [username, setUsername] = useState(user.username);
   const [bio, setBio] = useState(user.bio);
+  const [error, setError] = useState(' ');
 
   const [updating, setUpdating] = useState(false);
 
@@ -22,11 +23,21 @@ const Account = ({ session, user }: any) => {
 
   const handleUsernameChange = (e: any) => {
     setUsername(e.target.value);
+    validateUsername(e.target.value);
   };
 
   const handleBioChange = (e: any) => {
     setBio(e.target.value);
   };
+
+  const validateUsername = (username: string) => {
+    if (username.length != 0 && !username.match(/^[a-zA-Z0-9_]+$/)) {
+      setError('Username can only contain letters, numbers and underscores');
+      return false;
+    }
+    setError(' ')
+    return true
+  }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -101,14 +112,14 @@ const Account = ({ session, user }: any) => {
                   value={username}
                   onChange={handleUsernameChange}
                   type="text"
+                  autoComplete="off"
                   name="username"
                   className="w-full p-1 font-light text-xl border-2 border-gray-200 rounded-lg"
                   placeholder="Username..."
                 />
               </div>
               <label htmlFor="username" className="max-w-xl text-gray-500">
-                Your username is the unique identifier for your account. Give
-                people your username so they can follow you!
+                {error}
               </label>
             </div>
             <div className="name w-full">
@@ -119,6 +130,7 @@ const Account = ({ session, user }: any) => {
                   onChange={handleNameChange}
                   type="text"
                   name="name"
+                  maxLength={30}
                   className="w-full p-1 font-light text-xl border-2 border-gray-200 rounded-lg"
                   placeholder="Name..."
                 />
