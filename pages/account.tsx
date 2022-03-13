@@ -13,7 +13,7 @@ const Account = ({ session, user }: any) => {
   const [name, setName] = useState(user.name);
   const [username, setUsername] = useState(user.username);
   const [bio, setBio] = useState(user.bio);
-  const [error, setError] = useState(' ');
+  const [error, setError] = useState(" ");
 
   const [updating, setUpdating] = useState(false);
 
@@ -30,14 +30,18 @@ const Account = ({ session, user }: any) => {
     setBio(e.target.value);
   };
 
-  const validateUsername = (username: string) => {
-    if (username.length != 0 && !username.match(/^[a-zA-Z0-9_]+$/)) {
-      setError('Username can only contain letters, numbers and underscores');
+  const validateUsername = (name: string) => {
+    console.log(name.length);
+    if (!name.match(/^[a-zA-Z0-9_]+$/)) {
+      setError("Username can only contain letters, numbers and underscores");
       return false;
+    } else if (name.length > 21) {
+      setError("Username can only be 21 characters or less");
+    } else {
+      setError("");
+      return true;
     }
-    setError(' ')
-    return true
-  }
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -56,15 +60,16 @@ const Account = ({ session, user }: any) => {
         }),
       });
 
-      if (response.ok) {
+      const json = await response.json();
+
+      if (response.status === 200) {
         toast.success("Successfully updated user!");
         setUpdating(false);
       } else {
-        toast.error("Error updating user :c");
-        setUpdating(false);
+        throw new Error(json.error);
       }
     } catch (e) {
-      toast.error("Error updating user :c");
+      toast.error("Error updating user: " + e);
       setUpdating(false);
     }
   };
@@ -85,21 +90,23 @@ const Account = ({ session, user }: any) => {
         <div className="flex justify-start gap-8 items-center mt-8 profile-picture bg-cover h-48 relative">
           <div className="h-full w-full absolute -z-10">
             <Image
-              className="object-cover"
+              className="object-cover absolute"
               layout="fill"
               src={`https://images.unsplash.com/photo-1615752593047-30aa95f03882`}
               blurDataURL={`https://images.unsplash.com/photo-1615752593047-30aa95f03882?&auto=format&fit=crop&w=435&q=5`}
               placeholder="blur"
             ></Image>
           </div>
-          <img
-            src={user ? user.image : ""}
-            className="ml-4 w-20 md:w-40 rounded-full border-4 border-white shadow-2xl"
-            alt=""
-          />
-          <h1 className="text-4xl md:text-8xl font-bold text-white py-2 px-4 bg-black bg-opacity-50 rounded-lg">
-            {name}
-          </h1>
+          <div className="flex gap-4 justify-between items-center">
+            <img
+              src={user ? user.image : ""}
+              className="ml-4 w-20 md:w-40 rounded-full border-4 border-white shadow-2xl"
+              alt=""
+            />
+            <h1 className="text-4xl md:text-8xl font-bold text-white py-2 px-4 bg-black bg-opacity-50 rounded-lg">
+              {name}
+            </h1>
+          </div>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="account-information mt-8 flex justify-center items-start gap-8 flex-col max-w-4xl">
@@ -116,9 +123,10 @@ const Account = ({ session, user }: any) => {
                   name="username"
                   className="w-full p-1 font-light text-xl border-2 border-gray-200 rounded-lg"
                   placeholder="Username..."
+                  required={true}
                 />
               </div>
-              <label htmlFor="username" className="max-w-xl text-gray-500">
+              <label htmlFor="username" className="max-w-xl text-red-400">
                 {error}
               </label>
             </div>
@@ -161,7 +169,8 @@ const Account = ({ session, user }: any) => {
           <div className="save-button mt-8">
             <button
               type="submit"
-              className="flex px-36 justify-center items-center p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-2 h-12 w-36"
+              disabled={error ? true : false}
+              className="flex px-36 justify-center items-center p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-2 h-12 w-36 disabled:bg-blue-300"
             >
               {updating === false ? (
                 <p>Save</p>
@@ -188,11 +197,11 @@ export default Account;
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
 
-  const { client } = await connectToDatabase()
+  const { client } = await connectToDatabase();
 
   if (session) {
     const email = session?.user?.email;
-    const db = client.db('auth')
+    const db = client.db("auth");
     let user = await db.collection("users").findOne({ email });
     user = JSON.parse(JSON.stringify(user));
     return {

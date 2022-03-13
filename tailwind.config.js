@@ -23,6 +23,7 @@ module.exports = {
     extend: {
       fontWeight: ["hover", "focus"],
       borderWidth: ["focus"],
+      backgroundColor: ["hover", "disabled"]
     },
   },
   plugins: [require("@tailwindcss/typography")],

@@ -8,9 +8,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await getSession({ req });
     if (!session || !req.body.username) {
         return res.status(400).send({
-            message:
+            error:
                 "You're missing to log in or to provide the username to set.",
         });
+    }
+
+    if (!req.body.username.match(/^[a-zA-Z0-9_]+$/)) {
+        return res.status(400).send({
+            error: "The username use only letters, numbers and underscores.",
+        })
+    } else if (req.body.username.length > 21) {
+        return res.status(400).send({
+            error: "The username must be between 1 and 21 characters long.",
+        })
     }
 
     console.log(req.body);
