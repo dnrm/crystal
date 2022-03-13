@@ -13,7 +13,7 @@ const Account = ({ session, user }: any) => {
   const [name, setName] = useState(user.name);
   const [username, setUsername] = useState(user.username);
   const [bio, setBio] = useState(user.bio);
-  const [error, setError] = useState(" ");
+  const [error, setError] = useState("");
 
   const [updating, setUpdating] = useState(false);
 
@@ -87,17 +87,11 @@ const Account = ({ session, user }: any) => {
           </h1>
         </header>
         <hr className="border-1 border-gray-300" />
-        <div className="flex justify-start gap-8 items-center mt-8 profile-picture bg-cover h-48 relative">
-          <div className="h-full w-full absolute -z-10">
-            <Image
-              className="object-cover absolute"
-              layout="fill"
-              src={`https://images.unsplash.com/photo-1615752593047-30aa95f03882`}
-              blurDataURL={`https://images.unsplash.com/photo-1615752593047-30aa95f03882?&auto=format&fit=crop&w=435&q=5`}
-              placeholder="blur"
-            ></Image>
-          </div>
-          <div className="flex gap-4 justify-between items-center">
+        <div className="mt-8 profile-picture bg-cover h-48">
+          <div
+            className="p-4 flex gap-4 justify-start items-center w-full h-full"
+            style={{ backgroundImage: 'url("/trees-min.jpeg")' }}
+          >
             <img
               src={user ? user.image : ""}
               className="ml-4 w-20 md:w-40 rounded-full border-4 border-white shadow-2xl"

@@ -21,7 +21,7 @@ const Navbar = () => {
           rel="stylesheet"
         />
       </Head>
-      <ul className="flex p-4 md:px-8 py-5 justify-between items-center">
+      <ul className="h-22 flex p-4 md:px-8 py-5 justify-between items-center">
         <div className="flex">
           <li className="px-1 md:px-2 tracking-tighter">
             <Link href="/">

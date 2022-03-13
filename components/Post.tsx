@@ -12,7 +12,8 @@ interface Props {
 
 const Post = ({ src, title, layout, content, id }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
-
+  const [dashboard, setDashboard] = useState(false);
+  
   const showOptions = () => {
     setIsHovered(true);
   };
@@ -23,9 +24,9 @@ const Post = ({ src, title, layout, content, id }: Props) => {
 
   return (
     <div onMouseEnter={showOptions} onMouseLeave={hideOptions}>
-      {isHovered && (
+      {isHovered && dashboard ? (
         <Link href={`/edit/${id}`}>
-          <a className="cursor-pointer options bg-gray-100 absolute pt-6 pl-6 pr-4 pb-4 rounded-2xl">
+          <a className="cursor-pointer options bg-white border-gray-800 border-2 border-l-2 absolute p-4 rounded-br-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -42,7 +43,7 @@ const Post = ({ src, title, layout, content, id }: Props) => {
             </svg>
           </a>
         </Link>
-      )}
+      ) : null}
       <Link href={`/post/${id}`}>
         <a>
           <motion.div
@@ -50,7 +51,7 @@ const Post = ({ src, title, layout, content, id }: Props) => {
             transition={{
               duration: 0.3,
             }}
-            className={`bg-gray-100 rounded-lg p-4 ${
+            className={`bg-white border-2 border-gray-800 box-border ${
               layout === "row" ? "flex justify-start items-center" : null
             } ${
               layout === "column"
@@ -62,14 +63,14 @@ const Post = ({ src, title, layout, content, id }: Props) => {
               <img
                 src={src}
                 alt=""
-                className={`object-center rounded-md object-cover ${
-                  layout === "row" ? "mr-2 w-16 h-16 mb-0" : "mb-4 h-48 w-full"
+                className={`object-center rounded-md object-cover p-3 ${
+                  layout === "row" ? "mr-2 w-16 h-16 mb-0" : "h-56 w-full"
                 }`}
               />
             ) : null}
-            <div className="flex flex-col w-full break-all overflow-hidden">
+            <div className="flex flex-col w-full overflow-hidden bg-gray-800 p-4 text-white">
               <h1
-                className={`font-semibold text-lg leading-5 ${
+                className={`font-semibold text-xl leading-8 ${
                   layout === "row" ? "mr-2 min-w-max" : "mr-0"
                 }`}
               >
