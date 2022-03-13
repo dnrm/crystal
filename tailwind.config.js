@@ -16,6 +16,11 @@ module.exports = {
         neon: {
           DEFAULT: "#61FF00",
         },
+        light: '#f4f4f4',
+        dark: '#192231',
+        gold: '#c0b283',
+        leaf: '#404a42',
+        accent: '#c9cba3'
       },
     },
   },

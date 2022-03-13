@@ -35,9 +35,9 @@ export default function Login(props: any) {
         />
       </Head>
       <Navbar />
-      <main className="flex flex-col p-8">
+      <main className="flex flex-col p-8 bg-beige">
         <header className="flex items-center justify-between">
-          <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-bold text-black py-5">
+          <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-bold text-dark py-5">
             Dashboard
           </h1>
           <div className="logout flex items-center">
@@ -118,11 +118,11 @@ export default function Login(props: any) {
               </div>
               {posts && posts.length > 0 ? (
                 <div
-                  className={`posts ${
+                  className={`posts mx-auto ${
                     layout === "row" ? "grid grid-cols-1 gap-4" : null
                   } ${
                     layout === "column"
-                      ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+                      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
                       : null
                   }`}
                 >
@@ -135,6 +135,7 @@ export default function Login(props: any) {
                             title={i.title}
                             content={i.content}
                             src={i.src}
+                            mode="dashboard"
                           ></Post>
                         );
                       })

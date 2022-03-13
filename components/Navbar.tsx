@@ -21,7 +21,7 @@ const Navbar = () => {
           rel="stylesheet"
         />
       </Head>
-      <ul className="h-22 flex p-4 md:px-8 py-5 justify-between items-center">
+      <ul className="h-22 flex p-4 md:px-8 py-5 justify-between items-center bg-leaf text-white">
         <div className="flex">
           <li className="px-1 md:px-2 tracking-tighter">
             <Link href="/">
@@ -38,7 +38,7 @@ const Navbar = () => {
           <Link href={`/account`}>
             <a className="flex flex-row justify-between items-center">
               {/* @ts-ignore */}
-              <p className="text-sm text-gray-500 filter drop-shadow-xl hidden md:block">
+              <p className="text-sm filter drop-shadow-xl hidden md:block">
                 {/* @ts-ignore */}
                 {session.user.name ? session.user.name : session.user.email}
               </p>

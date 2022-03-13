@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+type viewMode = "feed" | "dashboard";
+
 interface Props {
   src?: string;
   title: string;
   layout: string;
   content: string;
   id: string;
+  mode?: viewMode;
 }
 
-const Post = ({ src, title, layout, content, id }: Props) => {
+const Post = ({ src, title, layout, content, id, mode }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [dashboard, setDashboard] = useState(false);
-  
+  const [dashboard, setDashboard] = useState(mode || "feed");
+
   const showOptions = () => {
     setIsHovered(true);
   };
@@ -24,7 +27,7 @@ const Post = ({ src, title, layout, content, id }: Props) => {
 
   return (
     <div onMouseEnter={showOptions} onMouseLeave={hideOptions}>
-      {isHovered && dashboard ? (
+      {isHovered && dashboard == "dashboard" ? (
         <Link href={`/edit/${id}`}>
           <a className="cursor-pointer options bg-white border-gray-800 border-2 border-l-2 absolute p-4 rounded-br-md">
             <svg
@@ -51,7 +54,7 @@ const Post = ({ src, title, layout, content, id }: Props) => {
             transition={{
               duration: 0.3,
             }}
-            className={`bg-white border-2 border-gray-800 box-border ${
+            className={`border-2 border-leaf bg-leaf text-white box-border ${
               layout === "row" ? "flex justify-start items-center" : null
             } ${
               layout === "column"
@@ -59,16 +62,18 @@ const Post = ({ src, title, layout, content, id }: Props) => {
                 : null
             }`}
           >
-            {src ? (
-              <img
-                src={src}
-                alt=""
-                className={`object-center rounded-md object-cover p-3 ${
-                  layout === "row" ? "mr-2 w-16 h-16 mb-0" : "h-56 w-full"
-                }`}
-              />
-            ) : null}
-            <div className="flex flex-col w-full overflow-hidden bg-gray-800 p-4 text-white">
+            <div className="bg-white w-full p-3">
+              {src ? (
+                <img
+                  src={src}
+                  alt=""
+                  className={`object-center rounded-sm object-cover ${
+                    layout === "row" ? "mr-2 w-16 h-16 mb-0" : "h-56 w-full"
+                  }`}
+                />
+              ) : null}
+            </div>
+            <div className="flex flex-col w-full overflow-hidden p-4">
               <h1
                 className={`font-semibold text-xl leading-8 ${
                   layout === "row" ? "mr-2 min-w-max" : "mr-0"

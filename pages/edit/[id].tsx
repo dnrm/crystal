@@ -5,11 +5,14 @@ import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
 import Footer from "../../components/Footer";
 
+type viewMode = 'feed' | 'dashboard';
+
 interface Post {
   title: string;
   content: string;
   user: string;
   src?: string;
+  mode: viewMode;
 }
 
 const fetcher = (...args: [any]) => fetch(...args).then((res) => res.json());
