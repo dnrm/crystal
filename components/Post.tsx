@@ -29,7 +29,7 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
     <div onMouseEnter={showOptions} onMouseLeave={hideOptions}>
       {isHovered && dashboard == "dashboard" ? (
         <Link href={`/edit/${id}`}>
-          <a className="cursor-pointer options bg-white border-gray-800 border-2 border-l-2 absolute p-4 rounded-br-md">
+          <a className="cursor-pointer options bg-white border-2 border-l-2 absolute p-4 rounded-br-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -54,7 +54,7 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
             transition={{
               duration: 0.3,
             }}
-            className={`border-2 border-leaf bg-leaf text-white box-border ${
+            className={`border-2 text-black box-border ${
               layout === "row" ? "flex justify-start items-center" : null
             } ${
               layout === "column"
@@ -62,13 +62,13 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
                 : null
             }`}
           >
-            <div className="bg-white w-full p-3">
+            <div className="bg-white  px-3 pt-3">
               {src ? (
                 <img
                   src={src}
                   alt=""
                   className={`object-center rounded-sm object-cover ${
-                    layout === "row" ? "mr-2 w-16 h-16 mb-0" : "h-56 w-full"
+                    layout === "row" ? "mr-2 w-16 h-16 mb-0 pb-3" : "h-56"
                   }`}
                 />
               ) : null}
