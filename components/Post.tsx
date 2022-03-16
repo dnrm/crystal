@@ -62,13 +62,13 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
                 : null
             }`}
           >
-            <div className="bg-white  px-3 pt-3">
+            <div className="bg-white px-3 pt-3 w-full">
               {src ? (
                 <img
                   src={src}
                   alt=""
                   className={`object-center rounded-sm object-cover ${
-                    layout === "row" ? "mr-2 w-16 h-16 mb-0 pb-3" : "h-56"
+                    layout === "row" ? "mr-2 w-16 h-16 mb-0 pb-3" : "h-56 w-full"
                   }`}
                 />
               ) : null}
