@@ -46,7 +46,7 @@ const Navbar = () => {
                 // @ts-ignore
                 src={session.user.image}
                 // @ts-ignore
-                alt={session.user?.name}
+                alt={'image'}
                 className="rounded-full w-12 h-12 ml-4 shadow-2xl"
               />
             </a>

@@ -3,7 +3,7 @@ import Head from "next/head";
 import { getSession } from "next-auth/react";
 import { useDropzone } from "react-dropzone";
 import { useToasts } from "react-toast-notifications";
-
+import { useSession } from "next-auth/react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import router from "next/router";
@@ -21,7 +21,10 @@ interface Props {
   session: object;
 }
 
-const Create = ({ session }: Props) => {
+const Create = () => {
+
+  const { data: session, status } = useSession();
+
   const titleRef: any = useRef();
   const contentRef: any = useRef();
 
@@ -59,6 +62,7 @@ const Create = ({ session }: Props) => {
    */
 
   const handleSubmit = async (e: FormEvent) => {
+    console.log("submit");
     e.preventDefault();
     if (session) {
       let title = titleRef.current.value;
@@ -120,6 +124,8 @@ const Create = ({ session }: Props) => {
           autoDismiss: true,
         });
       }
+    } else {
+      console.log("no session");
     }
   };
 
@@ -317,6 +323,7 @@ export default Create;
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
+  console.log("Session: " + JSON.stringify(session));
   if (!session) {
     return {
       redirect: {
@@ -327,6 +334,6 @@ export async function getServerSideProps(context: any) {
   }
 
   return {
-    props: { session },
+    props: { session: session },
   };
 }
