@@ -29,7 +29,7 @@ const Post: React.FC = () => {
   const createPost = async ({ title, user, src }: any) => {
     let api = "/api/update-post";
 
-    const response = fetch(api, {
+    const response = await fetch(api, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,8 +44,9 @@ const Post: React.FC = () => {
       }),
     });
 
-    console.log(await response);
-    return response;
+    const res = response.json()
+    console.log(res);
+    return res;
   };
 
   return (

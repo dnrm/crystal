@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
   if (session && session.user) {
-    const posts = await db.collection('posts').find({  }).toArray()
+    const posts = await db.collection('posts').find({  }).sort({'_id': -1}).toArray()
     res.send(posts);
   } else {
     res.send({ message: 'Not logged in' })
