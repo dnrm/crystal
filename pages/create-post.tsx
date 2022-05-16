@@ -287,7 +287,7 @@ const Create = () => {
               <div className="buttons flex justify-end mt-2">
                 <button
                   type="submit"
-                  className="px-12 py-3 bg-blue-500 hover:bg-blue-600 text-white shadow-2xl rounded-md outline-none"
+                  className="px-16 py-3 bg-blue-500 hover:bg-blue-600 text-white shadow-2xl rounded-md outline-none"
                 >
                   Post
                 </button>
