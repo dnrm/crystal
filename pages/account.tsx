@@ -93,7 +93,7 @@ const Account = ({ session, user }: any) => {
             style={{ backgroundImage: 'url("/trees-min.jpeg")' }}
           >
             <img
-              src={user ? user.image : ""}
+              src={user ? user.image : "https://avatars.dicebear.com/api/:sprites/:seed.svg"}
               className="ml-4 w-20 md:w-40 rounded-full border-4 border-white shadow-2xl"
               alt=""
             />

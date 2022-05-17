@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Footer from "../../components/Footer";
 import { toast } from "react-hot-toast";
+import { getSession } from 'next-auth/react'
 
 type viewMode = "feed" | "dashboard";
 
@@ -167,3 +168,20 @@ const Post: React.FC = () => {
 };
 
 export default Post;
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  console.log("Session: " + JSON.stringify(session));
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session: session },
+  };
+}

@@ -6,12 +6,12 @@ import Link from "next/link";
 import { GetServerSidePropsContext } from "next";
 import Post from "../components/Post";
 import Footer from "../components/Footer";
-import { usePostsContext } from "../context/posts";
+import { useOwnPostsContext } from "../context/ownPosts";
 
 export default function Login(props: any) {
   const { data: session } = useSession();
   const [layout, setLayout] = useState<string>("column");
-  const posts: any = usePostsContext();
+  const posts: any = useOwnPostsContext();
   console.log(posts);
 
   const toggleLayout = (e: any) => {

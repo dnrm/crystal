@@ -17,14 +17,15 @@ export default function SignIn({ providers }: any) {
                 </div>
                 <div className="providers mt-4">
                     {Object.values(providers).map((provider: any) => (
-                        <div key={provider.name} className="shadow-lg rounded-md hover:bg-blue-300 hover:text-white cursor-pointer mt-1">
+                        <div key={provider.name} className="shadow-xl bg-gray-100 rounded-md hover:bg-gray-200 cursor-pointer mt-1">
                             <button
                                 onClick={() =>
                                     signIn(provider.id, { callbackUrl: "/" })
                                 }
 
-                                className="w-full text-left p-5"
+                                className="w-full flex justify-start items-center gap-4 text-lg text-left p-5"
                             >
+                                <img src="/google.png" className="h-10 w-10" alt="" />
                                 Sign in with {provider.name}
                             </button>
                         </div>
