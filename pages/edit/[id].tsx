@@ -2,10 +2,10 @@ import React, { useRef } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import ReactMarkdown from "react-markdown";
 import Footer from "../../components/Footer";
+import { toast } from "react-hot-toast";
 
-type viewMode = 'feed' | 'dashboard';
+type viewMode = "feed" | "dashboard";
 
 interface Post {
   title: string;
@@ -44,10 +44,31 @@ const Post: React.FC = () => {
       }),
     });
 
-    const res = response.json()
+    const res = response.json();
+
+    if (response.ok) {
+      toast.success("Updated post successfully!");
+      router.push("/dashboard");
+    }
     console.log(res);
     return res;
   };
+
+  const deletePost = async () => {
+    let api = `/api/delete/${id}`;
+
+    const response = await fetch(api, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      toast.success("Deleted post successfully!");
+      router.push("/dashboard");
+    }
+  }
 
   return (
     <div>
@@ -94,12 +115,47 @@ const Post: React.FC = () => {
                 </textarea>
               ) : null}
             </div>
-            <div className="submitButton">
+            <div className="submitButton grid place-items-center grid-cols-7 gap-4">
               <button
                 type="submit"
-                className="px-12 py-3 mt-4 mb-8 w-full bg-blue-500 hover:bg-blue-600 text-white shadow-2xl rounded-md outline-none cursor-pointer"
+                className="flex justify-center items-center gap-2 px-12 py-3 mt-4 mb-8 col-span-5 w-full bg-blue-500 hover:bg-blue-600 text-white shadow-2xl rounded-md outline-none cursor-pointer"
               >
                 Save Post
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={deletePost}
+                type="button"
+                className="flex justify-center items-center gap-2 px-12 py-3 mt-4 mb-8 col-span-2 w-full bg-red-400 hover:bg-red-600 text-white shadow-2xl rounded-md outline-none cursor-pointer"
+              >
+                Delete
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
               </button>
             </div>
           </form>

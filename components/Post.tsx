@@ -29,7 +29,7 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
     <div onMouseEnter={showOptions} onMouseLeave={hideOptions}>
       {isHovered && dashboard == "dashboard" ? (
         <Link href={`/edit/${id}`}>
-          <a className="cursor-pointer options bg-white border-2 border-l-2 absolute p-4 rounded-br-md">
+          <a className="cursor-pointer options bg-gray-200 border-2 border-l-2 absolute p-4 rounded-br-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
