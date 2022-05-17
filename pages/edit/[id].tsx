@@ -1,10 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Footer from "../../components/Footer";
 import { toast } from "react-hot-toast";
-import { getSession } from 'next-auth/react'
+import { getSession } from "next-auth/react";
+
+import Modal from "../../components/Modal";
 
 type viewMode = "feed" | "dashboard";
 
@@ -24,6 +26,8 @@ const Post: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
   const textArea = useRef(null);
+
+  const [modal, setModal] = useState(false);
 
   const { data: post } = useSWR(`/api/post/${id}`, fetcher);
 
@@ -56,6 +60,9 @@ const Post: React.FC = () => {
   };
 
   const deletePost = async () => {
+    setModal(false)
+    console.log("deleting post: " + id);
+
     let api = `/api/delete/${id}`;
 
     const response = await fetch(api, {
@@ -66,13 +73,34 @@ const Post: React.FC = () => {
     });
 
     if (response.ok) {
+      console.log('yay')
       toast.success("Deleted post successfully!");
       router.push("/dashboard");
+    } else {
+      console.log('oh')
     }
-  }
+  };
+
+  const hideModal = () => {
+    setModal(false);
+  };
+
+  const showModal = () => {
+    setModal(true);
+  };
 
   return (
     <div>
+      {modal ? (
+        <>
+          <div className="dim bg-black opacity-50 fixed w-screen h-screen" />
+          <Modal
+            title={post.title}
+            hide={hideModal}
+            confirmDelete={deletePost}
+          />
+        </>
+      ) : null}
       <Head>
         <title>{post?.title ? post.title : "Loading..."} | Crystal</title>
       </Head>
@@ -138,7 +166,7 @@ const Post: React.FC = () => {
                 </svg>
               </button>
               <button
-                onClick={deletePost}
+                onClick={showModal}
                 type="button"
                 className="flex justify-center items-center gap-2 px-12 py-3 mt-4 mb-8 col-span-2 w-full bg-red-400 hover:bg-red-600 text-white shadow-2xl rounded-md outline-none cursor-pointer"
               >
