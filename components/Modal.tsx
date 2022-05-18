@@ -1,7 +1,6 @@
 import React from "react";
 
 const Modal = ({ title, hide, confirmDelete }: any) => {
-
   return (
     <div className="mt-40 flex justify-between items-center flex-col shadow-xl bg-white overflow-y-auto overflow-x-hidden fixed z-50 max-w-4xl border-gray-200 border-2 rounded-xl mx-auto h-1/3 md:inset-0">
       <div className="relative p-4 w-full h-full md:h-auto">
@@ -11,7 +10,10 @@ const Modal = ({ title, hide, confirmDelete }: any) => {
       </div>
       <div className="title text-xl">{title}</div>
       <div className="buttons grid grid-cols-2 gap-4 p-4 w-full">
-        <button className="p-2 bg-red-500 text-white px-8 rounded-md w-full col-span-1" onClick={confirmDelete}>
+        <button
+          className="p-2 bg-red-500 text-white px-8 rounded-md w-full col-span-1"
+          onClick={confirmDelete}
+        >
           Confirm
         </button>
         <button
