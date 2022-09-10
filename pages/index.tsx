@@ -5,7 +5,7 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useSession } from "next-auth/react";
-import src from "../images/beach.png";
+import src from "../images/desert.jpeg";
 import { usePostsContext } from "../context/posts";
 import Post from "../components/Post";
 import { PostType } from "../types/Post";
@@ -76,7 +76,7 @@ export default function Home() {
             layout="responsive"
             priority={true}
             placeholder="blur"
-            blurDataURL={"/beach.min.jpeg"}
+            blurDataURL={"/desert.jpeg"}
           />
         </section>
         <section id="posts" className="max-w-6xl mx-auto">
