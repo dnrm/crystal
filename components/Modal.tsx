@@ -1,6 +1,12 @@
 import React from "react";
 
-const Modal = ({ title, hide, confirmDelete }: any) => {
+type Props = {
+  title: string;
+  hide: () => void;
+  confirmDelete: () => void;
+};
+
+const Modal = ({ title, hide, confirmDelete }: Props) => {
   return (
     <div className="mt-40 flex justify-between items-center flex-col shadow-xl bg-white overflow-y-auto overflow-x-hidden fixed z-50 max-w-4xl border-gray-200 border-2 rounded-xl mx-auto h-1/3 md:inset-0">
       <div className="relative p-4 w-full h-full md:h-auto">

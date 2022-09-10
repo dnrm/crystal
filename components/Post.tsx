@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type viewMode = "feed" | "dashboard";
 
@@ -26,10 +27,14 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
   };
 
   return (
-    <div onMouseEnter={showOptions} onMouseLeave={hideOptions}>
+    <div
+      onMouseEnter={showOptions}
+      onMouseLeave={hideOptions}
+      className="rounded-md"
+    >
       {isHovered && dashboard == "dashboard" ? (
         <Link href={`/edit/${id}`}>
-          <a className="cursor-pointer options bg-gray-200 border-2 border-l-2 absolute p-4 rounded-br-md">
+          <a className="cursor-pointer options z-30 bg-white border-2 border-l-2 absolute p-4 rounded-br-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -48,13 +53,13 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
         </Link>
       ) : null}
       <Link href={`/post/${id}`}>
-        <a>
+        <a className="rounded-md">
           <motion.div
             layout="position"
             transition={{
               duration: 0.3,
             }}
-            className={`border-2 text-black box-border ${
+            className={`border-2 text-black box-border rounded-md ${
               layout === "row" ? "flex justify-start items-center" : null
             } ${
               layout === "column"
@@ -62,21 +67,34 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
                 : null
             }`}
           >
-            <div className={`bg-white pt-3 ${layout === "column" ? "w-full px-3" : "pl-3"}`}>
+            <div
+              className={`bg-white pt-3 ${
+                layout === "column" ? "w-full px-3" : "pl-3"
+              }`}
+            >
               {src ? (
-                <img
-                  src={src}
-                  alt=""
-                  className={`object-center rounded-sm object-cover ${
-                    layout === "row" ? "mr-2 w-16 h-16 mb-0 pb-3" : "h-56 w-full"
-                  }`}
-                />
+                <div
+                  className={`relative w-full ${
+                    layout === "row"
+                      ? "mr-2 w-16 h-16 mb-0 pb-3"
+                      : "h-56 w-full"
+                  } `}
+                >
+                  <Image
+                    src={src}
+                    blurDataURL="https://via.placeholder.com/100x100?text=+"
+                    placeholder="blur"
+                    alt=""
+                    layout="fill"
+                    className={`object-center rounded-lg object-cover`}
+                  />
+                </div>
               ) : null}
             </div>
             <div className="flex flex-col w-full overflow-hidden p-4">
               <h1
                 className={`font-semibold text-xl leading-8 ${
-                  layout === "row" ? "mr-2 min-w-max" : "mr-0"
+                  layout === "row" ? "mr-2 truncate" : "mr-0 truncate "
                 }`}
               >
                 {title}

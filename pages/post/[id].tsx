@@ -1,13 +1,14 @@
+import useSWR from "swr";
 import React from "react";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
 import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar";
 
 const fetcher = (...args: [any]) => fetch(...args).then((res) => res.json());
 
-import Navbar from "../../components/Navbar";
 
 const Post: React.FC = () => {
   const router = useRouter();
@@ -22,22 +23,23 @@ const Post: React.FC = () => {
       </Head>
       <Navbar />
       <main className="flex flex-col items-center border-t-2 border-gray-300">
-        <div className="image h-96 p-0 mt-2 md:mt-8 bg-black">
+        <div className="image relative w-full h-[50vh] max-w-3xl mt-2 md:mt-8">
           {post && (
-            <img
+            <Image
               src={post ? post.src : "https://source.unsplash.com/random"}
-              className="h-full w-full object-cover opacity-100"
+              layout="fill"
+              objectFit="contain"
               alt=""
             />
           )}
         </div>
         <section
           id="post-container"
-          className="px-2 md:p-0 md:px-16 w-full flex justify-center items-center"
+          className="px-2 md:p-0 w-full flex justify-center items-center max-w-3xl mx-auto"
         >
-          <div className="max-w-6xl pb-16 pt-8">
+          <div className="pb-16 pt-8">
             {post ? (
-              <div className="prose">
+              <div className="prose max-w-none text-justify">
                 <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
             ) : null}

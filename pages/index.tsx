@@ -8,10 +8,11 @@ import { useSession } from "next-auth/react";
 import src from "../images/beach.png";
 import { usePostsContext } from "../context/posts";
 import Post from "../components/Post";
+import { PostType } from "../types/Post";
 
 export default function Home() {
   const { data: session } = useSession();
-  const posts: any = usePostsContext();
+  const posts: PostType[] | null = usePostsContext();
   const [layout, setLayout] = useState<string>("column");
 
   return (
@@ -110,7 +111,9 @@ export default function Home() {
               </div>
             ) : (
               <div className="h-96 w-full grid place-items-center">
-                <h1 className="text-5xl font-bold tracking-tighter">No posts yet!</h1>
+                <h1 className="text-5xl font-bold tracking-tighter">
+                  No posts yet!
+                </h1>
               </div>
             )}
           </div>

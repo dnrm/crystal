@@ -1,7 +1,12 @@
-import { createContext, useContext } from "react";
 import useSwr from "swr";
+import { PostType } from "../types/Post";
+import { createContext, useContext } from "react";
 
-const PostsContext = createContext({});
+interface PostsContextType {
+  data: PostType[];
+}
+
+const PostsContext = createContext<Array<PostType> | null>(null);
 
 const fetcher = (...args: [any]) => fetch(...args).then((res) => res.json());
 

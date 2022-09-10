@@ -8,7 +8,7 @@ import Post from "../components/Post";
 import Footer from "../components/Footer";
 import { useOwnPostsContext } from "../context/ownPosts";
 
-export default function Login(props: any) {
+export default function Login() {
   const { data: session } = useSession();
   const [layout, setLayout] = useState<string>("column");
   const posts: any = useOwnPostsContext();
@@ -155,7 +155,7 @@ export default function Login(props: any) {
               )}
             </div>
           ) : (
-            <div className="login-form w-auto h-80 flex flex-col justify-center items-center text-center">
+            <div className="login-form w-auto h-[60vh] flex flex-col justify-center items-center text-center">
               <h3 className="text-2xl">Log in to create your own profile!</h3>
               <button
                 className="bg-blue-500 p-4 rounded-lg shadow-xl text-white my-4"

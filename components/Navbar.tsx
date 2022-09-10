@@ -8,10 +8,6 @@ import { useUserContext } from "../context/user";
 const Navbar = () => {
   const { data: session, status } = useSession();
 
-  let user = useUserContext();
-
-  console.log(user);
-
   return (
     <nav>
       <Head>
@@ -33,6 +29,11 @@ const Navbar = () => {
               <a className={`${styles.mono} text-lg font-normal`}>Dashboard</a>
             </Link>
           </li>
+          <li className="px-1 md:px-2 tracking-tighter">
+            <Link href="/create-post">
+              <a className={`${styles.mono} text-lg font-normal`}>Publish</a>
+            </Link>
+          </li>
         </div>
         {session && (
           <Link href={`/account`}>
@@ -46,7 +47,7 @@ const Navbar = () => {
                 // @ts-ignore
                 src={session.user.image}
                 // @ts-ignore
-                alt={'image'}
+                alt={"image"}
                 className="rounded-full w-12 h-12 ml-4 shadow-2xl"
               />
             </a>

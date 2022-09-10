@@ -1,12 +1,12 @@
-import React, { FormEvent, useRef, useCallback, useState } from "react";
 import Head from "next/head";
-import { getSession } from "next-auth/react";
-import { useDropzone } from "react-dropzone";
-import { useToasts } from "react-toast-notifications";
-import { useSession } from "next-auth/react";
+import router from "next/router";
+import { toast } from "react-hot-toast";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import router from "next/router";
+import { getSession } from "next-auth/react";
+import { useDropzone } from "react-dropzone";
+import { useSession } from "next-auth/react";
+import React, { FormEvent, useRef, useCallback, useState } from "react";
 
 // * Types
 
@@ -22,23 +22,17 @@ interface Props {
 }
 
 const Create = () => {
-
   const { data: session, status } = useSession();
 
   const titleRef: any = useRef();
   const contentRef: any = useRef();
-
-  const { addToast } = useToasts();
 
   const [files, setFiles] = useState<FileList | null>();
   const [mediaType, setMediaType] = useState<string>();
 
   const onDrop = useCallback(async (acceptedFiles) => {
     if (!acceptedFiles[0].name.match(/.(jpg|jpeg|png|gif|mp4)$/i)) {
-      addToast("File is not an image or video.", {
-        appearance: "error",
-        autoDismiss: true,
-      });
+      toast.error("File is not an image or video.");
       return;
     }
 
@@ -69,10 +63,7 @@ const Create = () => {
       let content = contentRef.current.value;
 
       if (title == "" || content == "") {
-        addToast("Please fill out all input fields.", {
-          appearance: "info",
-          autoDismiss: true,
-        });
+        toast.error("Please fill out all input fields.");
         return;
       }
 
@@ -109,20 +100,14 @@ const Create = () => {
         console.log(response);
 
         if (response.ok) {
-          addToast("Created post successfully :D", {
-            appearance: "success",
-            autoDismiss: true,
-          });
+          toast.success("Created post successfully :D");
           router.push("/dashboard");
         } else {
           throw new Error("Unable to create post");
         }
       } catch (e) {
         console.log("Error:", e);
-        addToast("Unable to create post :(", {
-          appearance: "error",
-          autoDismiss: true,
-        });
+        toast.error("Unable to create post :(");
       }
     } else {
       console.log("no session");

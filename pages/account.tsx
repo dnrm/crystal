@@ -80,7 +80,7 @@ const Account = ({ session, user }: any) => {
         <title>My Account | Crystal</title>
       </Head>
       <Navbar />
-      <main className="flex flex-col p-8">
+      <main className="flex flex-col p-8 max-w-6xl mx-auto mb-5">
         <header className="flex items-center justify-between">
           <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-bold text-black py-5">
             My Account
@@ -93,7 +93,11 @@ const Account = ({ session, user }: any) => {
             style={{ backgroundImage: 'url("/trees-min.jpeg")' }}
           >
             <img
-              src={user ? user.image : "https://avatars.dicebear.com/api/:sprites/:seed.svg"}
+              src={
+                user
+                  ? user.image
+                  : "https://avatars.dicebear.com/api/:sprites/:seed.svg"
+              }
               className="ml-4 w-20 md:w-40 rounded-full border-4 border-white shadow-2xl"
               alt=""
             />
@@ -103,9 +107,9 @@ const Account = ({ session, user }: any) => {
           </div>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="account-information mt-8 flex justify-center items-start gap-8 flex-col max-w-4xl">
+          <div className="account-information mt-8 flex justify-center items-start gap-2 flex-col">
             <div className="username w-full">
-              <div className="username-input flex justify-start items-center gap-8 w-full">
+              <div className="username-input flex justify-start items-start flex-col gap-2 w-full">
                 <h1 className="font-bold text-4xl tracking-tighter">
                   Username
                 </h1>
@@ -125,7 +129,7 @@ const Account = ({ session, user }: any) => {
               </label>
             </div>
             <div className="name w-full">
-              <div className="name-input flex justify-start items-center gap-8 w-full">
+              <div className="name-input flex justify-start items-start flex-col gap-2 w-full">
                 <h1 className="font-bold text-4xl tracking-tighter">Name</h1>
                 <input
                   value={name}
@@ -142,7 +146,7 @@ const Account = ({ session, user }: any) => {
               </label>
             </div>
             <div className="bio w-full">
-              <div className="bio-input flex justify-start items-start gap-8 w-full">
+              <div className="bio-input flex justify-start items-start flex-col gap-2 w-full">
                 <h1 className="font-bold text-4xl tracking-tighter">Bio</h1>
                 <textarea
                   onChange={handleBioChange}
@@ -164,7 +168,7 @@ const Account = ({ session, user }: any) => {
             <button
               type="submit"
               disabled={error ? true : false}
-              className="flex px-36 justify-center items-center p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-2 h-12 w-36 disabled:bg-blue-300"
+              className="flex px-36 justify-center items-center p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-2 h-12 w-full disabled:bg-blue-300"
             >
               {updating === false ? (
                 <p>Save</p>
