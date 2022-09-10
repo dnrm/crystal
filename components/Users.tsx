@@ -32,7 +32,7 @@ const Users = () => {
                   <h2 className="text-sm sm:text-md" data-tip data-for={i._id}>
                     Joined <TimeAgo date={i.date}></TimeAgo>
                   </h2>
-                  <ReactToolip
+                  <ReactTooltip
                     getContent={() => new Date(i.date).toDateString()}
                     id={i._id}
                     type="info"
