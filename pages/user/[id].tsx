@@ -14,6 +14,7 @@ type Props = {
     image: string;
     bio: string;
   };
+  error: any;
 };
 
 const User = ({ message, user, error }: Props) => {
