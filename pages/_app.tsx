@@ -2,15 +2,20 @@ import "../styles/globals.css";
 import { motion } from "framer-motion";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
+import type { NextComponentType } from "next";
 import { PostsWrapper } from "../context/posts";
 import { SessionProvider } from "next-auth/react";
 import { OwnPostsWrapper } from "../context/ownPosts";
+
+type AppPropsWithSession = AppProps & {
+  pageProps: NextComponentType & { session?: any };
+};
 
 function MyApp({
   Component,
   pageProps: { session, ...pageProps },
   router,
-}: AppProps) {
+}: AppPropsWithSession) {
   return (
     <SessionProvider session={session}>
       <PostsWrapper>
