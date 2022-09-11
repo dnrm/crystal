@@ -30,7 +30,7 @@ const Create = () => {
   const [files, setFiles] = useState<FileList | null>();
   const [mediaType, setMediaType] = useState<string>();
 
-  const onDrop = useCallback(async (acceptedFiles) => {
+  const onDrop = useCallback(async (acceptedFiles: any) => {
     if (!acceptedFiles[0].name.match(/.(jpg|jpeg|png|gif|mp4)$/i)) {
       toast.error("File is not an image or video.");
       return;
