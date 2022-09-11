@@ -4,6 +4,11 @@ import { ObjectId } from "bson";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
+
+  if (!req.query.id) {
+    return res.status(400).send("No ID provided");
+  }
+
   const id: string = req.query.id.toString();
 
   const post = await db
