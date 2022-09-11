@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
 import Head from "next/head";
-import Navbar from "../../components/Navbar";
+import Image from "next/image";
 import { MongoClient } from "mongodb";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import Navbar from "../../components/Navbar";
 import { getSession } from "next-auth/react";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import src from "../../images/trees.jpeg";
+import { GetServerSidePropsContext } from "next";
 
 type Props = {
   message: string;
@@ -25,26 +27,35 @@ const User = ({ message, user, error }: Props) => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center w-screen h-[90vh]">
+      <div className="flex justify-start flex-col items-start w-screen h-[90vh]">
         <Head>
           <title>{user?.name} | dnrm</title>
           <meta name="description" content={`View ${user}'s profile!`} />
         </Head>
-        {!error ? (
-          <div className="user-info text-center">
-            <div className="image flex justify-center items-center">
-              <img src={user.image} alt="" className="rounded-full" />
+        <div className="image w-full h-72 relative">
+          <Image alt="hi" src={src} layout="fill" objectFit="cover" />
+        </div>
+        <div className="user-info p-5">
+          {!error ? (
+            <div className="user">
+              <div className="image">
+                <img
+                  src={user.image}
+                  alt="Profile picture"
+                  className="rounded-full border-4 border-white shadow-md w-42 h-42"
+                />
+              </div>
+              <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter">
+                {user?.name}
+              </h1>
+              <p className="text-neutral-500">{user.bio || "No bio yet..."}</p>
             </div>
+          ) : (
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter">
-              {user?.name}
+              user not found
             </h1>
-            <p className="text-neutral-500">{user.bio || "No bio yet..."}</p>
-          </div>
-        ) : (
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter">
-            user not found
-          </h1>
-        )}
+          )}
+        </div>
       </div>
     </>
   );
