@@ -99,6 +99,7 @@ export default function Home() {
                   ? posts.map((i: any) => {
                       return (
                         <Post
+                          key={i._id}
                           layout={layout}
                           id={i._id}
                           title={i.title}

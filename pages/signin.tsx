@@ -1,6 +1,7 @@
 import { getProviders, signIn } from "next-auth/react";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
+import Image from "next/image";
 
 export default function SignIn({ providers }: any) {
   return (
@@ -25,7 +26,7 @@ export default function SignIn({ providers }: any) {
                 onClick={() => signIn(provider.id, { callbackUrl: "/" })}
                 className="w-full flex justify-start items-center gap-4 text-lg text-left p-5"
               >
-                <img src="/google.png" className="h-10 w-10" alt="" />
+                <Image src="/google.png" width={25} height={25} alt="Google logo" />
                 Sign in with {provider.name}
               </button>
             </div>

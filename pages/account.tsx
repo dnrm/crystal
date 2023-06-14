@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { getSession } from "next-auth/react";

@@ -2,11 +2,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 import { MongoClient } from "mongodb";
 import { authOptions } from "./auth/[...nextauth]";
+import { Session } from "next-auth";
 
 const client = new MongoClient(process.env.MONGODB_URI || "");
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getServerSession(req, res, authOptions);
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session: Session = await getServerSession(req, res, authOptions);
   if (!session || !req.body.username) {
     return res.status(400).send({
       error: "You're missing to log in or to provide the username to set.",
@@ -25,20 +26,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   console.log(req.body);
 
-  const email = session?.user?.email;
+  const email = session.user.email;
   await client.connect();
   let db = await client.db("auth");
-  let doc = await db
-    .collection("users")
-    .findOneAndUpdate(
-      { email },
-      {
-        $set: {
-          username: req.body.username,
-          name: req.body.name,
-          bio: req.body.bio,
-        },
-      }
-    );
+  let doc = await db.collection("users").findOneAndUpdate(
+    { email },
+    {
+      $set: {
+        username: req.body.username,
+        name: req.body.name,
+        bio: req.body.bio,
+      },
+    }
+  );
   return res.status(200).send(doc);
 };
+
+export default handler;

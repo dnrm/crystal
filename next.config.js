@@ -4,7 +4,8 @@ module.exports = {
       "source.unsplash.com",
       "images.unsplash.com",
       "res.cloudinary.com",
-      "cdn.hashnode.com"
+      "cdn.hashnode.com",
+      "lh3.googleusercontent.com",
     ],
   },
 };

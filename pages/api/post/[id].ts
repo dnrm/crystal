@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../lib/mongodb-old";
 import { ObjectId } from "bson";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
 
   if (!req.query.id) {
@@ -18,3 +18,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   res.send(post[0]);
 };
+
+export default handler;

@@ -33,16 +33,18 @@ const User = ({ message, user, error }: Props) => {
           <meta name="description" content={`View ${user}'s profile!`} />
         </Head>
         <div className="image w-full h-72 relative">
-          <Image alt="hi" src={src} layout="fill" objectFit="cover" />
+          <Image alt="hi" src={src} fill className="object-cover" />
         </div>
         <div className="user-info p-5">
           {!error ? (
             <div className="user">
               <div className="image">
-                <img
+                <Image
                   src={user.image}
                   alt="Profile picture"
-                  className="rounded-full border-4 border-white shadow-md w-42 h-42"
+                  className="rounded-full border-4 border-white shadow-md"
+                  width={96}
+                  height={96}
                 />
               </div>
               <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tighter">

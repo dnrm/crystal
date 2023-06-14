@@ -3,8 +3,9 @@ import { getServerSession } from "next-auth/next";
 import { connectToDatabase } from "../../lib/mongodb-old";
 import { ObjectId } from "mongodb";
 import { authOptions } from "./auth/[...nextauth]";
+import { Session } from "next-auth";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
 
   if (req.method != "POST") {
@@ -13,16 +14,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const session = await getServerSession(req, res, authOptions);
+  const session: Session = await getServerSession(req, res, authOptions);
 
   if (req.body.content && req.body.title && session) {
-    console.log(req.body.content);
-    console.log(req.body.id) 
     const response = await db.collection("posts").updateOne(
       { _id: new ObjectId(req.body.id) },
       {
         $set: {
-          author: session?.user?.email,
+          author: session.user.email,
           title: req?.body?.title,
           content: req?.body?.content,
           src: req?.body?.src,
@@ -37,3 +36,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 };
+
+export default handler;

@@ -1,37 +1,28 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect } from "react";
 import Link from "next/link";
-import Head from "next/head";
-import styles from "../styles/fonts.module.css";
 import { useSession } from "next-auth/react";
-import { useUserContext } from "../context/user";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
 
   return (
     <nav>
-      <Head>
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <ul className="h-22 flex p-4 md:px-8 py-5 justify-between items-center text-gray-700">
+      <ul className="h-22 flex p-4 md:px-8 py-5 justify-between items-center text-gray-700 font-sauce">
         <div className="flex">
           <li className="px-1 md:px-2 tracking-tighter">
             <Link href="/" legacyBehavior>
-              <a className={`${styles.mono} text-lg font-normal`}>Home</a>
+              <a className={`text-base font-medium`}>Home</a>
             </Link>
           </li>
           <li className="px-1 md:px-2 tracking-tighter">
             <Link href="/dashboard" legacyBehavior>
-              <a className={`${styles.mono} text-lg font-normal`}>Dashboard</a>
+              <a className={`text-base font-medium`}>Dashboard</a>
             </Link>
           </li>
           <li className="px-1 md:px-2 tracking-tighter">
             <Link href="/create-post" legacyBehavior>
-              <a className={`${styles.mono} text-lg font-normal`}>Publish</a>
+              <a className={`text-base font-medium`}>Publish</a>
             </Link>
           </li>
         </div>

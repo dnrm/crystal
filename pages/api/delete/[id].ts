@@ -3,10 +3,11 @@ import { connectToDatabase } from "../../../lib/mongodb-old";
 import { getServerSession } from "next-auth/next";
 import { ObjectId } from "mongodb";
 import { authOptions } from "../auth/[...nextauth]";
+import { Session } from "next-auth";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
-  const session = await getServerSession(req, res, authOptions);
+  const session: Session = await getServerSession(req, res, authOptions);
 
   if (!req.query.id) {
     return res.status(400).send("No ID provided");
@@ -27,3 +28,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(403).send({ message: "Not logged in" });
   }
 };
+
+export default handler;

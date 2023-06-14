@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import router from "next/router";
 import { toast } from "react-hot-toast";

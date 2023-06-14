@@ -6,7 +6,7 @@ const client = new MongoClient(
     process.env.DATABASE_URL || ""
 );
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await getSession({ req });
     if (!session) {
         return res.status(404).send({
@@ -20,3 +20,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     let doc = await db.collection("users").findOne({ email });
     return res.status(200).send(doc);
 };
+
+
+export default handler
