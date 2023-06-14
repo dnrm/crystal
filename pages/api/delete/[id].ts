@@ -1,11 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../lib/mongodb-old";
-import { getSession } from "next-auth/react";
-import { ObjectID } from "mongodb";
+import { getServerSession } from "next-auth/next";
+import { ObjectId } from "mongodb";
+import { authOptions } from "../auth/[...nextauth]";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions);
 
   if (!req.query.id) {
     return res.status(400).send("No ID provided");
@@ -17,12 +18,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const posts = await db
         .collection("posts")
-        .deleteOne({ _id: ObjectID(id) });
+        .deleteOne({ _id: new ObjectId(id) });
       res.status(200).send(posts);
     } catch (e) {
       res.status(500).json(e);
     }
   } else {
-    res.send({ message: "Not logged in" });
+    res.status(403).send({ message: "Not logged in" });
   }
 };

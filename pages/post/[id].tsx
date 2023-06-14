@@ -21,8 +21,8 @@ const Post: React.FC = () => {
         <title>{post?.title ? post.title : "Loading..."} | Crystal</title>
       </Head>
       <Navbar />
-      <header className="border-t-2 border-gray-300">
-        <div className="image relative h-[50vh] w-screen">
+      <header className="border-t-2 border-gray-300 bg-black">
+        <div className="image relative h-[50vh] w-screen opacity-50">
           {post && (
             <Image
               src={post ? post.src : "https://source.unsplash.com/random"}
@@ -36,11 +36,11 @@ const Post: React.FC = () => {
       <main className="flex flex-col items-center">
         <section
           id="post-container"
-          className="px-2 md:p-0 w-full flex justify-center items-center max-w-3xl mx-auto"
+          className="px-2 md:p-0 w-full flex justify-center items-center max-w-4xl mx-auto"
         >
           <div className="pb-16 pt-8">
             {post ? (
-              <div className="prose max-w-none text-justify prose-headings:font-sauce prose-headings:font-black prose-headings:text-left prose-headings:text-6xl">
+              <div className="prose max-w-none text-justify font-sauce prose-h1:tracking-tight prose-h1:font-black prose-h1:text-left prose-h1:text-6xl prose-h1:m-0 prose-hr:my-4 prose-h2:text-4xl">
                 <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
             ) : null}

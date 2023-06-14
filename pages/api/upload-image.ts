@@ -1,14 +1,12 @@
 import middleware from "../../middleware/middleware";
-import nextConnect from "next-connect";
+import { createRouter } from "next-connect";
 import cloudinary from "cloudinary";
 
-const handler = nextConnect();
-handler.use(middleware);
+const router = createRouter();
 
-handler.post(async (req: any, res: any) => {
-  console.log(req.files);
-  console.log(req.files.image[0].path);
+router.use(middleware);
 
+router.post(async (req: any, res: any) => {
   cloudinary.v2.uploader.upload(
     req.files.image[0].path,
     function (error: any, result: any) {
@@ -26,4 +24,4 @@ export const config = {
   },
 };
 
-export default handler;
+export default router.handler();

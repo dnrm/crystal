@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
 import { connectToDatabase } from "../../lib/mongodb-old";
+import { authOptions } from "../../pages/api/auth/[...nextauth]"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
@@ -11,11 +12,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions);
+  console.log("Session: " + session)
 
   if (req.body.content && req.body.title && session) {
-    const response = await db.collection("posts").insert({
-      author: session?.user?.email,
+    const response = await db.collection("posts").insertOne({
+      author: session?.user?.email || "Anonymous",
       title: req?.body?.title,
       content: req?.body?.content,
       src: req?.body?.src,

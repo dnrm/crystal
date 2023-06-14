@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
 import { connectToDatabase } from "../../lib/mongodb-old";
 import { ObjectId } from "mongodb";
+import { authOptions } from "./auth/[...nextauth]";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
@@ -12,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions);
 
   if (req.body.content && req.body.title && session) {
     console.log(req.body.content);

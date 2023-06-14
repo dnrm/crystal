@@ -103,6 +103,7 @@ const Create = () => {
           toast.success("Created post successfully :D");
           router.push("/dashboard");
         } else {
+          console.log("Error:", response);
           throw new Error("Unable to create post");
         }
       } catch (e) {

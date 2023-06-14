@@ -1,9 +1,9 @@
-import nextConnect from "next-connect";
+import { createRouter } from "next-connect";
 import multiparty from "multiparty";
 
-const middleware = nextConnect();
+const router = createRouter();
 
-middleware.use(async (req: any, res: any, next: any) => {
+router.use(async (req: any, res: any, next: any) => {
   const form = new multiparty.Form();
 
   await form.parse(req, function (err: any, fields: any, files: any) {
@@ -13,4 +13,4 @@ middleware.use(async (req: any, res: any, next: any) => {
   });
 });
 
-export default middleware;
+export default router;
