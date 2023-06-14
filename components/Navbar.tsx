@@ -20,23 +20,23 @@ const Navbar = () => {
       <ul className="h-22 flex p-4 md:px-8 py-5 justify-between items-center text-gray-700">
         <div className="flex">
           <li className="px-1 md:px-2 tracking-tighter">
-            <Link href="/">
+            <Link href="/" legacyBehavior>
               <a className={`${styles.mono} text-lg font-normal`}>Home</a>
             </Link>
           </li>
           <li className="px-1 md:px-2 tracking-tighter">
-            <Link href="/dashboard">
+            <Link href="/dashboard" legacyBehavior>
               <a className={`${styles.mono} text-lg font-normal`}>Dashboard</a>
             </Link>
           </li>
           <li className="px-1 md:px-2 tracking-tighter">
-            <Link href="/create-post">
+            <Link href="/create-post" legacyBehavior>
               <a className={`${styles.mono} text-lg font-normal`}>Publish</a>
             </Link>
           </li>
         </div>
         {session && (
-          <Link href={`/account`}>
+          <Link href={`/account`} legacyBehavior>
             <a className="flex flex-row justify-between items-center">
               {/* @ts-ignore */}
               <p className="text-sm filter drop-shadow-xl hidden md:block">

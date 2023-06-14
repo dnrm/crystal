@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import { connectToDatabase } from "../../lib/mongodb-old";
-import { ObjectID } from "mongodb";
+import { ObjectId } from "mongodb";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
@@ -18,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     console.log(req.body.content);
     console.log(req.body.id) 
     const response = await db.collection("posts").updateOne(
-      { _id: ObjectID(req.body.id) },
+      { _id: new ObjectId(req.body.id) },
       {
         $set: {
           author: session?.user?.email,

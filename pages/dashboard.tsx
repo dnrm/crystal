@@ -27,7 +27,7 @@ export default function Login() {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin={`true`}
+          crossOrigin=""
         />
         <link
           href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
@@ -109,7 +109,7 @@ export default function Login() {
                       </svg>
                     )}
                   </button>
-                  <Link href={`/create-post`}>
+                  <Link legacyBehavior href={`/create-post`}>
                     <a className="py-2 px-4 bg-blue-500 text-white inline-block shadow-sm hover:shadow-xl rounded-xl transition-all duration-200">
                       Create Post
                     </a>
@@ -122,7 +122,7 @@ export default function Login() {
                     layout === "row" ? "grid grid-cols-1 gap-4" : null
                   } ${
                     layout === "column"
-                      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+                      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"
                       : null
                   }`}
                 >
@@ -146,7 +146,7 @@ export default function Login() {
                   <h1 className="text-4xl font-bold w-full text-center">
                     Create your first post!
                   </h1>
-                  <Link href={`/create-post`}>
+                  <Link legacyBehavior href={`/create-post`}>
                     <a className="py-6 px-20 bg-blue-500 text-white text-xl inline-block shadow-xl hover:shadow-xl rounded-xl transition-all duration-200">
                       Create Post
                     </a>

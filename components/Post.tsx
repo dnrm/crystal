@@ -30,11 +30,12 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
     <div
       onMouseEnter={showOptions}
       onMouseLeave={hideOptions}
-      className="rounded-md"
+      className="bg-neutral-100 rounded-xl"
     >
       {isHovered && dashboard == "dashboard" ? (
-        <Link href={`/edit/${id}`}>
-          <a className="cursor-pointer options z-30 bg-white border-2 border-l-2 absolute p-4 rounded-br-md">
+        // LEGACY EDIT BUTTON
+        <Link legacyBehavior href={`/edit/${id}`}>
+          <a className="cursor-pointer options z-30 bg-neutral-100 border-2 border-l-2 absolute p-4 rounded-br-md rounded-tl-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -52,14 +53,14 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
           </a>
         </Link>
       ) : null}
-      <Link href={`/post/${id}`}>
+      <Link legacyBehavior href={`/post/${id}`}>
         <a className="rounded-md">
           <motion.div
             layout="position"
             transition={{
               duration: 0.3,
             }}
-            className={`border-2 text-black box-border rounded-md ${
+            className={`text-black box-border rounded-md ${
               layout === "row" ? "flex justify-start items-center" : null
             } ${
               layout === "column"
@@ -68,15 +69,13 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
             }`}
           >
             <div
-              className={`bg-white pt-3 ${
-                layout === "column" ? "w-full px-3" : "pl-3"
-              }`}
+              className={`${layout === "column" ? "w-full px-5 pt-5" : "p-3"}`}
             >
               {src ? (
                 <div
-                  className={`relative w-full ${
+                  className={`relative ${
                     layout === "row"
-                      ? "mr-2 w-16 h-16 mb-0 pb-3"
+                      ? "w-16 h-16"
                       : "h-56 w-full"
                   } `}
                 >
@@ -85,21 +84,21 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
                     blurDataURL="https://via.placeholder.com/100x100?text=+"
                     placeholder="blur"
                     alt=""
-                    layout="fill"
+                    fill
                     className={`object-center rounded-lg object-cover`}
                   />
                 </div>
               ) : null}
             </div>
-            <div className="flex flex-col w-full overflow-hidden p-4">
+            <div className={`flex flex-col w-full overflow-hidden ${layout === "column" ? "p-5" : "py-3 pl-1"}`}>
               <h1
-                className={`font-semibold text-xl leading-8 ${
+                className={`font-bold font-sauce text-xl leading-8 hover:underline ${
                   layout === "row" ? "mr-2 truncate" : "mr-0 truncate "
                 }`}
               >
                 {title}
               </h1>
-              <p className="text-sm truncate max-w-full">{content}</p>
+              <p className="text-sm max-w-full">{content.substring(0, 100)}...</p>
             </div>
           </motion.div>
         </a>

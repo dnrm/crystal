@@ -42,7 +42,7 @@ export default function Home() {
           </h1>
           <div className="login flex items-center">
             {!session && (
-              <Link href={`/dashboard`}>
+              <Link legacyBehavior href={`/dashboard`}>
                 <div className="flex items-center cursor-pointer">
                   <p className="font-semibold tracking-tighter text-xl md:text-2xl">
                     Login

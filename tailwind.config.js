@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         dm: ['"Dm Mono"', "serif"],
+        sauce: ["Open Sauce Sans", "sans-serif"],
       },
       zIndex: {
         "-10": "-10",
@@ -16,10 +17,10 @@ module.exports = {
         neon: {
           DEFAULT: "#61FF00",
         },
-        light: '#f4f4f4',
-        dark: '#192231',
-        gold: '#c0b283',
-        accent: '#d8e2dc'
+        light: "#f4f4f4",
+        dark: "#192231",
+        gold: "#c0b283",
+        accent: "#d8e2dc",
       },
     },
   },
@@ -27,7 +28,7 @@ module.exports = {
     extend: {
       fontWeight: ["hover", "focus"],
       borderWidth: ["focus"],
-      backgroundColor: ["hover", "disabled"]
+      backgroundColor: ["hover", "disabled"],
     },
   },
   plugins: [require("@tailwindcss/typography")],
