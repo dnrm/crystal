@@ -5,7 +5,7 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useSession } from "next-auth/react";
-import src from "../images/desert.jpeg";
+import src from "../images/germany.jpg";
 import { usePostsContext } from "../context/posts";
 import Post from "../components/Post";
 import { PostType } from "../types/Post";
@@ -66,18 +66,18 @@ export default function Home() {
             )}
           </div>
         </header>
-        <section>
-          <Image
-            src={src}
-            alt="Cover image"
-            width="100"
-            height="38"
-            className="object-cover"
-            layout="responsive"
-            priority={true}
-            placeholder="blur"
-            blurDataURL={"/desert.jpeg"}
-          />
+        <section className="max-h-screen h-[75vh] w-full">
+          <div className="relative h-full w-full">
+            <Image
+              src={src}
+              alt="Cover image"
+              className="object-cover"
+              fill
+              priority={true}
+              placeholder="blur"
+              blurDataURL={"/germany.jpeg"}
+            />
+          </div>
         </section>
         <section id="posts" className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-6xl lg:text-8xl tracking-tighter font-bold text-black pt-8 pb-2">

@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import src from "../images/trees.jpeg";
 
 const NotFound = () => {
@@ -28,7 +28,7 @@ const NotFound = () => {
         </h1>
       </header>
       <section>
-        <Image src={src} layout="responsive" />
+        <Image alt="Not found" src={src} layout="responsive" />
       </section>
     </main>
   );
