@@ -5,6 +5,7 @@
     "autoprefixer": "^10.4.14",
     "framer-motion": "^10.12.16",
     "mongodb": "^5.6.0",
+    "multiparty": "^4.2.3",
     "next": "^13.4.5",
     "next-auth": "^4.22.1",
     "next-connect": "^1.0.0",
