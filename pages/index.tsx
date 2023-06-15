@@ -37,7 +37,7 @@ export default function Home() {
           ></script>
         </Head>
         <header className={`flex items-center justify-between`}>
-          <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-bold text-black py-5">
+          <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-sauce font-black text-black py-5">
             Welcome
           </h1>
           <div className="login flex items-center">
@@ -80,7 +80,7 @@ export default function Home() {
           </div>
         </section>
         <section id="posts" className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-6xl lg:text-8xl tracking-tighter font-bold text-black pt-8 pb-2">
+          <h1 className="text-3xl md:text-4xl lg:text-6xl tracking-tighter font-black font-sauce text-black pt-8 pb-2">
             Posts
           </h1>
           <hr />
