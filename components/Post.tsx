@@ -98,7 +98,7 @@ const Post = ({ src, title, layout, content, id, mode }: Props) => {
               >
                 {title}
               </h1>
-              <p className="text-sm max-w-full">{content.substring(0, 100)}...</p>
+              <p className="text-sm max-w-full">{content.substring(0, 75).trimEnd()}...</p>
             </div>
           </motion.div>
         </a>

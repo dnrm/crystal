@@ -40,7 +40,7 @@ const Post: React.FC = () => {
         >
           <div className="pb-16 pt-8">
             {post ? (
-              <div className="prose max-w-none text-justify font-sauce prose-h1:tracking-tight prose-h1:font-black prose-h1:text-left prose-h1:text-6xl prose-h1:m-0 prose-hr:my-4 prose-h2:text-4xl">
+              <div className="prose leading-[2.4em] max-w-none text-justify font-sauce prose-h1:tracking-tight prose-h1:font-black prose-h1:text-left prose-h1:text-6xl prose-h1:m-0 prose-hr:my-4 prose-h2:text-4xl">
                 <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
             ) : null}

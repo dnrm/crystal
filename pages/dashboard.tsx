@@ -32,15 +32,15 @@ export default function Login() {
       </Head>
       <Navbar />
       <main className="flex flex-col p-8 bg-beige">
-        <header className="flex items-center justify-between">
-          <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-bold text-dark py-5">
+        <header className="flex items-end justify-between py-5">
+          <h1 className="text-4xl md:text-8xl lg:text-9xl tracking-tighter font-black font-sauce text-dark">
             Dashboard
           </h1>
           <div className="logout flex items-center">
             {session && (
               <button onClick={() => signOut()}>
                 <div className="flex items-center cursor-pointer">
-                  <p className="font-semibold tracking-tighter text-xl md:text-2xl">
+                  <p className="font-sauce font-bold tracking-tighter text-xl md:text-2xl">
                     Logout
                   </p>
                   <svg
